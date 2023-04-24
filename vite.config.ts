@@ -36,6 +36,10 @@ export default defineConfig({
         find: /\@\//,
         replacement: `${pathResolve('src')}/`,
       },
+      {
+        find: 'vue',
+        replacement: 'vue/dist/vue.esm-bundler.js',
+      },
     ],
   },
 });
