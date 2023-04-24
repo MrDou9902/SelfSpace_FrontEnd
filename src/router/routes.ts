@@ -5,6 +5,7 @@ const b = { template: '<div>About</div>' };
 
 const routes = [
   { name: 'login', path: '/login', component: Login },
+  { path: '/', redirect: '/login' },
   {
     name: 'home',
     path: '/home',
