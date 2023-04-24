@@ -33,7 +33,7 @@ export default defineConfig({
     ],
     alias: [
       {
-        find: /\@\//,
+        find: /@\//,
         replacement: `${pathResolve('src')}/`,
       },
       {

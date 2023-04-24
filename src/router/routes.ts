@@ -1,0 +1,19 @@
+const Login = () => import('@/views/login/loginIndex.vue');
+const Home = () => import('@/components/homeIndex.vue');
+const a = { template: '<div>Home</div>' };
+const b = { template: '<div>About</div>' };
+
+const routes = [
+  { name: 'login', path: '/login', component: Login },
+  {
+    name: 'home',
+    path: '/home',
+    component: Home,
+    children: [
+      { name: 'a', path: 'a', component: a },
+      { name: 'b', path: 'b', component: b },
+    ],
+  },
+];
+
+export default routes;
