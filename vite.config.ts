@@ -1,14 +1,25 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import { resolve } from 'path';
 
-const root = process.cwd()
+const root = process.cwd();
 function pathResolve(dir: string) {
-  return resolve(root, '.', dir)
+  return resolve(root, '.', dir);
 }
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
   resolve: {
     extensions: [
       '.mjs',
@@ -27,4 +38,4 @@ export default defineConfig({
       },
     ],
   },
-})
+});
