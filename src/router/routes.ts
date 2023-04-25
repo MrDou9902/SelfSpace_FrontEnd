@@ -1,6 +1,6 @@
 const Login = () => import('@/views/login/loginIndex.vue');
 const Home = () => import('@/components/homeIndex.vue');
-const a = { template: '<div>Home</div>' };
+const a = () => import('@/views/testA/testAIndex.vue');
 const b = { template: '<div>About</div>' };
 
 const routes = [

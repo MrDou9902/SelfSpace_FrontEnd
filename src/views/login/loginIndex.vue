@@ -16,6 +16,7 @@
               type="password"
               v-model="userLoginForm.password"
               placeholder="请输入密码"
+              @keyup.enter="signIn"
             />
           </el-form>
           <el-checkbox
@@ -25,11 +26,8 @@
             size="large"
             >记住密码</el-checkbox
           >
-          <div class="message">
-            <span v-html="error"></span>
-          </div>
           <div id="btn">
-            <el-button class="loginbtn" @click="login">登陆</el-button>
+            <el-button class="loginbtn" @click="signIn">登陆</el-button>
           </div>
         </el-card>
       </div>
@@ -38,24 +36,27 @@
 </template>
 
 <script lang="ts" setup>
-// import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { getCurrentInstance, reactive, ref } from 'vue';
-
-const router = useRouter()
+import { login } from '@/api/login';
+const router = useRouter();
 
 let userLoginForm = reactive({
   username: '',
   password: '',
   isRemember: 0,
 });
-// const store = useStore();
-// const router = useRouter();
-// const { proxy } = getCurrentInstance();
-let error = ref('');
+
 //获取用户登录信息
-function login() {
-  router.push('/home')
+function signIn() {
+  login({
+    userName: userLoginForm.username,
+    password: userLoginForm.password,
+  }).then((res) => {
+    if(res.code === 0 ){
+      router.push('/home');
+    }
+  });
 }
 //获取用户信息
 function getUserInfo() {
@@ -85,7 +86,7 @@ function getUserInfo() {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 25px;
-    border: 1px solid black;
+    border: 1px solid rgba(146, 145, 145, 0.2);
     background-color: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(5px);
     box-shadow: -5px -5px 10px rgb(39, 65, 65), 5px 5px 20px aqua;
@@ -117,7 +118,7 @@ function getUserInfo() {
       margin: 0 45px;
       border-radius: 25px;
       background-color: rgba(255, 255, 255, 0.1);
-      .el-checkbox{
+      .el-checkbox {
         color: #333;
       }
     }
@@ -141,7 +142,7 @@ function getUserInfo() {
   }
   .el-button {
     width: 70%;
-    height: 35px;
+    height: 2rem;
     border-radius: 30px;
     line-height: 35px;
   }
