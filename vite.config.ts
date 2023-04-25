@@ -9,7 +9,7 @@ const root = process.cwd();
 function pathResolve(dir: string) {
   return resolve(root, '.', dir);
 }
-// https://vitejs.dev/config/
+
 export default defineConfig({
   plugins: [
     vue(),
