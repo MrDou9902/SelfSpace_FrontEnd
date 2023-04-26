@@ -11,10 +11,11 @@ import 'element-plus/theme-chalk/el-loading.css';
 import 'element-plus/theme-chalk/el-message.css';
 import 'element-plus/theme-chalk/el-notification.css';
 import 'element-plus/theme-chalk/el-message-box.css';
+import Particles from 'particles.vue3'
+
 
 
 const app = createApp(App);
-
 app.use(router);
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -24,5 +25,5 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(ElementPlus, {
   locale: zhCn,
 });
-
+app.use(Particles)
 app.mount('#app');

@@ -1,69 +1,80 @@
 <template>
+  <Particles
+    id="tsparticles"
+    :particlesInit="particlesInit"
+    :particlesLoaded="particlesLoaded"
+    :options="particleOptions"
+  />
   <div id="login">
     <div id="contain">
-      <div id="left-card">
-        <div class="welcome">Welcome！</div>
-      </div>
-      <div id="right-card">
-        <el-card class="el-card">
-          <h2>
-            {{ isLogin ? '欢迎登录' : '欢迎注册' }}
-          </h2>
-          <el-form
-            ref="ruleFormRef"
-            class="loginForm"
-            :model="userLoginForm"
-            :rules="rules"
-            label-position="top"
-            label-width="70px"
-          >
-            <el-form-item label="用户名" prop="userName">
-              <el-input
-                v-model="userLoginForm.userName"
-                placeholder="请输入用户名"
-              />
-            </el-form-item>
-            <el-form-item label="密码" prop="password">
-              <el-input
-                type="password"
-                v-model="userLoginForm.password"
-                placeholder="请输入密码"
-                @keyup.enter="signIn(isLogin)"
-              />
-            </el-form-item>
-            <el-form-item
-              v-show="!isLogin"
-              label="确认密码"
-              prop="confirmPassword"
-              @keyup.enter="registerFn"
-            >
-              <el-input
-                type="password"
-                v-model="userLoginForm.confirmPassword"
-                placeholder="再次确认密码"
-              />
-            </el-form-item>
-            <el-form-item class="rememberPassword">
-              <el-link :underline="false" @click="toRegister">{{
-                isLogin ? '注册账户' : '返回登录'
-              }}</el-link>
-              <el-checkbox
-                v-if="isLogin"
-                v-model="userLoginForm.isRemember"
-                :true-label="1"
-                :false-label="0"
-                size="large"
-                >记住密码</el-checkbox
-              >
-            </el-form-item>
-          </el-form>
-
-          <div class="button-group">
-            <el-button v-if="isLogin" @click="signIn">登陆</el-button>
-            <el-button v-else @click="registerFn">注册</el-button>
+      <Transition>
+        <div v-if="changeItem" id="left-card">
+          <div class="welcome">
+            {{ isLogin ? 'Welcome Login!' : 'Welcome Register!' }}
           </div>
-        </el-card>
-      </div>
+        </div>
+      </Transition>
+      <Transition>
+        <div v-if="changeItem" id="right-card">
+          <el-card class="el-card">
+            <h2 style="opacity: 0.6">
+              {{ isLogin ? '欢迎登录' : '欢迎注册' }}
+            </h2>
+            <el-form
+              ref="ruleFormRef"
+              class="loginForm"
+              :model="userLoginForm"
+              :rules="rules"
+              label-position="top"
+              label-width="70px"
+            >
+              <el-form-item label="用户名" prop="userName">
+                <el-input
+                  v-model="userLoginForm.userName"
+                  placeholder="请输入用户名"
+                />
+              </el-form-item>
+              <el-form-item label="密码" prop="password">
+                <el-input
+                  type="password"
+                  v-model="userLoginForm.password"
+                  placeholder="请输入密码"
+                  @keyup.enter="signIn"
+                />
+              </el-form-item>
+              <el-form-item
+                v-show="!isLogin"
+                label="确认密码"
+                prop="confirmPassword"
+                @keyup.enter="registerFn"
+              >
+                <el-input
+                  type="password"
+                  v-model="userLoginForm.confirmPassword"
+                  placeholder="再次确认密码"
+                />
+              </el-form-item>
+              <el-form-item class="rememberPassword">
+                <el-link :underline="false" @click="toRegister">{{
+                  isLogin ? '注册账户' : '返回登录'
+                }}</el-link>
+                <el-checkbox
+                  v-if="isLogin"
+                  v-model="userLoginForm.isRemember"
+                  :true-label="1"
+                  :false-label="0"
+                  size="large"
+                  >记住密码</el-checkbox
+                >
+              </el-form-item>
+            </el-form>
+            <div class="button-group">
+              <el-button v-if="isLogin" @click="signIn">登陆</el-button>
+              <el-button v-else @click="registerFn">注册</el-button>
+            </div>
+          </el-card>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -74,10 +85,20 @@ import { reactive, ref } from 'vue';
 import { login, register } from '@/api/login';
 import type { FormInstance, FormRules } from 'element-plus';
 import { ElMessage } from 'element-plus';
-import localCache from '@/utils/LocalStorage'
+import localCache from '@/utils/LocalStorage';
+import particleOptions from './particleOptions';
+import { loadFull } from 'tsparticles';
 
+const particlesInit = async (engine: any) => {
+  await loadFull(engine);
+};
+
+const particlesLoaded = async (container: any) => {
+  console.log('Particles container loaded', container);
+};
 const router = useRouter();
 const isLogin = ref(true);
+const changeItem = ref(true);
 const userLoginForm = reactive({
   userName: '',
   password: '',
@@ -93,9 +114,34 @@ const rules = reactive<FormRules>({
   ],
 });
 
+// 添加动画只能手动重置表单
+const reset = () => {
+  setTimeout(() => {
+    changeItem.value = !changeItem.value;
+    userLoginForm.confirmPassword = '';
+    userLoginForm.userName = '';
+    userLoginForm.password = '';
+    if (isLogin.value) {
+      rules.confirmPassword = [];
+    } else {
+      rules.confirmPassword = [
+        { required: true, message: '请确认密码', trigger: 'blur' },
+      ];
+    }
+    ruleFormRef.value?.resetFields();
+  }, 250);
+};
+
 // 登录
-const signIn = async (isLogin: boolean) => {
-  if (!ruleFormRef.value || !isLogin) return;
+const signIn = async () => {
+  console.log(
+    ruleFormRef.value,
+    isLogin.value,
+    !ruleFormRef.value || !isLogin.value,
+    rules
+  );
+
+  if (!ruleFormRef.value || !isLogin.value) return;
   await ruleFormRef.value.validate((valid) => {
     if (valid) {
       login({
@@ -103,7 +149,7 @@ const signIn = async (isLogin: boolean) => {
         password: userLoginForm.password,
       }).then((res) => {
         if (res.code === 0) {
-          localCache.setCache('token', res.result.token)
+          localCache.setCache('token', res.result.token);
           router.push('/home');
         }
       });
@@ -114,18 +160,20 @@ const signIn = async (isLogin: boolean) => {
 // 注册
 const registerFn = async () => {
   if (!ruleFormRef.value) return;
-  if (userLoginForm.confirmPassword !== userLoginForm.password) {
-    ElMessage.warning('请检查两个密码是否一致！');
-    return;
-  }
   await ruleFormRef.value.validate((valid) => {
     if (valid) {
+      if (userLoginForm.confirmPassword !== userLoginForm.password) {
+        ElMessage.warning('请检查两次输入的密码是否一致！');
+        return;
+      }
       register({
         userName: userLoginForm.userName,
         password: userLoginForm.password,
       }).then((res) => {
         if (res.code === 0) {
           isLogin.value = true;
+          changeItem.value = !changeItem.value;
+          reset();
         }
       });
     }
@@ -135,18 +183,9 @@ const registerFn = async () => {
 // 注册账户界面跳转
 const toRegister = () => {
   isLogin.value = !isLogin.value;
-  if (isLogin.value) {
-    rules.confirmPassword = [];
-  } else {
-    rules.confirmPassword = [
-      { required: true, message: '请确认密码', trigger: 'blur' },
-    ];
-  }
-  setTimeout(() => {
-    ruleFormRef.value?.resetFields();
-  }, 0);
-}
-
+  changeItem.value = !changeItem.value;
+  reset();
+};
 </script>
 
 <style lang="scss" scoped>
@@ -162,9 +201,9 @@ const toRegister = () => {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url(../../assets/cat&fish.webp);
+  // background-image: url(../../assets/cat&fish.webp);
   background-size: 100% 100%;
-  background-color: #a7a8bd;
+  // background-color: #a7a8bd;
   #contain {
     position: absolute;
     top: 50%;
