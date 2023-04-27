@@ -13,3 +13,7 @@ pnpm i
 ## 一个很不错的渐变配色网站
 
 https://webgradients.com/
+
+## 首页粒子特效
+
+https://github.com/matteobruni/tsparticles
