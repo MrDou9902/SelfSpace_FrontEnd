@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import sideBar from '@/components/sideBar.vue';
-import headerBar from '@/components/headerBar.vue';
+import sideBar from '@/components/sideBar.vue'
+import headerBar from '@/components/headerBar.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -30,7 +30,7 @@ import headerBar from '@/components/headerBar.vue';
   width: 100%;
   display: flex;
   height: calc(100% - 50px);
-  .content{
+  .content {
     flex: 1;
     overflow: auto;
   }

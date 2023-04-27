@@ -1,18 +1,17 @@
-import myRequest from '@/service';
+import myRequest from '@/service'
 
 export function login(params: object) {
   return myRequest({
-    url:'/users/login',
+    url: '/users/login',
     method: 'post',
-    data: params,
-  });
+    data: params
+  })
 }
 
 export function register(params: object) {
   return myRequest({
-    url:'/users/register',
+    url: '/users/register',
     method: 'post',
-    data: params,
-  });
+    data: params
+  })
 }
-

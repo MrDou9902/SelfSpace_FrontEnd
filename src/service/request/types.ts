@@ -2,12 +2,12 @@ import type {
   AxiosResponse,
   InternalAxiosRequestConfig,
   CreateAxiosDefaults,
-  AxiosRequestConfig,
+  AxiosRequestConfig
 } from 'axios'
 export interface RequestInterceptors<T> {
   // 请求拦截
   requestInterceptors?: (
-    config: InternalAxiosRequestConfig,
+    config: InternalAxiosRequestConfig
   ) => InternalAxiosRequestConfig
   requestInterceptorsCatch?: (err: any) => any
   // 响应拦截

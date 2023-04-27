@@ -1,18 +1,18 @@
-import Request from './request';
-import { AxiosResponse } from 'axios';
+import Request from './request'
+import { AxiosResponse } from 'axios'
 
-import type { RequestConfig } from './request/types';
+import type { RequestConfig } from './request/types'
 
 export interface YWZResponse<T> {
-  code: number;
-  statusCode: number;
-  desc: string;
-  result: T;
+  code: number
+  statusCode: number
+  desc: string
+  result: T
 }
 
 // 重写返回类型
 interface myRequestConfig<T, R> extends RequestConfig<YWZResponse<R>> {
-  data?: T;
+  data?: T
 }
 
 const request = new Request({
@@ -23,10 +23,10 @@ const request = new Request({
     requestInterceptors: (config) => config,
     // 响应拦截器
     responseInterceptors: (result: AxiosResponse) => {
-      return result;
-    },
-  },
-});
+      return result
+    }
+  }
+})
 
 /**
  * @description: 函数的描述
@@ -36,12 +36,12 @@ const request = new Request({
  * @returns {Promise}
  */
 const myRequest = <D = any, T = any>(config: myRequestConfig<D, T>) => {
-  const { method = 'GET' } = config;
+  const { method = 'GET' } = config
   if (method === 'get' || method === 'GET') {
-    config.params = config.data;
+    config.params = config.data
   }
-  return request.request<YWZResponse<T>>(config);
-};
+  return request.request<YWZResponse<T>>(config)
+}
 // // 取消请求
 // export const cancelRequest = (url: string | string[]) => {
 //   return request.cancelRequest(url)
@@ -51,4 +51,4 @@ const myRequest = <D = any, T = any>(config: myRequestConfig<D, T>) => {
 //   return request.cancelAllRequest()
 // }
 
-export default myRequest;
+export default myRequest

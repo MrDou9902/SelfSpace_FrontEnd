@@ -1,24 +1,24 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import { resolve } from 'path';
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { resolve } from 'path'
 
-const root = process.cwd();
+const root = process.cwd()
 function pathResolve(dir: string) {
-  return resolve(root, '.', dir);
+  return resolve(root, '.', dir)
 }
 
 export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver()]
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
-    }),
+      resolvers: [ElementPlusResolver()]
+    })
   ],
   resolve: {
     extensions: [
@@ -29,17 +29,17 @@ export default defineConfig({
       '.tsx',
       '.json',
       '.less',
-      '.css',
+      '.css'
     ],
     alias: [
       {
         find: /@\//,
-        replacement: `${pathResolve('src')}/`,
+        replacement: `${pathResolve('src')}/`
       },
       {
         find: 'vue',
-        replacement: 'vue/dist/vue.esm-bundler.js',
-      },
-    ],
-  },
-});
+        replacement: 'vue/dist/vue.esm-bundler.js'
+      }
+    ]
+  }
+})

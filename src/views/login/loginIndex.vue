@@ -83,59 +83,57 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
-import { reactive, ref } from 'vue';
-import { login, register } from '@/api/login';
-import type { FormInstance, FormRules } from 'element-plus';
-import { ElMessage } from 'element-plus';
-import localCache from '@/utils/LocalStorage';
-import particleOptions from './particleOptions';
-import { loadFull } from 'tsparticles';
+import { useRouter } from 'vue-router'
+import { reactive, ref } from 'vue'
+import { login, register } from '@/api/login'
+import type { FormInstance, FormRules } from 'element-plus'
+import { ElMessage } from 'element-plus'
+import localCache from '@/utils/LocalStorage'
+import particleOptions from './particleOptions'
+import { loadFull } from 'tsparticles'
 
-let loading = ref(false);
+let loading = ref(false)
 
 const particlesInit = async (engine: any) => {
-  await loadFull(engine);
-};
+  await loadFull(engine)
+}
 
 const particlesLoaded = async (container: any) => {
-  console.log('Particles container loaded', container);
-};
-const router = useRouter();
-const isLogin = ref(true);
-const changeItem = ref(true);
+  console.log('Particles container loaded', container)
+}
+const router = useRouter()
+const isLogin = ref(true)
+const changeItem = ref(true)
 const userLoginForm = reactive({
   userName: '',
   password: '',
   isRemember: 0,
-  confirmPassword: '',
-});
-const ruleFormRef = ref<FormInstance>();
+  confirmPassword: ''
+})
+const ruleFormRef = ref<FormInstance>()
 const rules = reactive<FormRules>({
   userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-  confirmPassword: [
-    { required: false, message: '请确认密码', trigger: 'blur' },
-  ],
-});
+  confirmPassword: [{ required: false, message: '请确认密码', trigger: 'blur' }]
+})
 
 // 添加动画只能手动重置表单
 const reset = () => {
   setTimeout(() => {
-    changeItem.value = !changeItem.value;
-    userLoginForm.confirmPassword = '';
-    userLoginForm.userName = '';
-    userLoginForm.password = '';
+    changeItem.value = !changeItem.value
+    userLoginForm.confirmPassword = ''
+    userLoginForm.userName = ''
+    userLoginForm.password = ''
     if (isLogin.value) {
-      rules.confirmPassword = [];
+      rules.confirmPassword = []
     } else {
       rules.confirmPassword = [
-        { required: true, message: '请确认密码', trigger: 'blur' },
-      ];
+        { required: true, message: '请确认密码', trigger: 'blur' }
+      ]
     }
-    ruleFormRef.value?.resetFields();
-  }, 250);
-};
+    ruleFormRef.value?.resetFields()
+  }, 250)
+}
 
 // 登录
 const signIn = async () => {
@@ -144,57 +142,57 @@ const signIn = async () => {
     isLogin.value,
     !ruleFormRef.value || !isLogin.value,
     rules
-  );
+  )
 
-  if (!ruleFormRef.value || !isLogin.value) return;
+  if (!ruleFormRef.value || !isLogin.value) return
   await ruleFormRef.value.validate((valid) => {
     if (valid) {
-      loading.value = true;
+      loading.value = true
       login({
         userName: userLoginForm.userName,
-        password: userLoginForm.password,
+        password: userLoginForm.password
       }).then((res) => {
         if (res.code === 0) {
-          localCache.setCache('token', res.result.token);
-          router.push('/home');
-          loading.value = false;
+          localCache.setCache('token', res.result.token)
+          router.push('/home')
+          loading.value = false
         }
-      });
+      })
     }
-  });
-};
+  })
+}
 
 // 注册
 const registerFn = async () => {
-  if (!ruleFormRef.value) return;
+  if (!ruleFormRef.value) return
   await ruleFormRef.value.validate((valid) => {
     if (valid) {
       if (userLoginForm.confirmPassword !== userLoginForm.password) {
-        ElMessage.warning('请检查两次输入的密码是否一致！');
-        return;
+        ElMessage.warning('请检查两次输入的密码是否一致！')
+        return
       }
-      loading.value = true;
+      loading.value = true
       register({
         userName: userLoginForm.userName,
-        password: userLoginForm.password,
+        password: userLoginForm.password
       }).then((res) => {
         if (res.code === 0) {
-          isLogin.value = true;
-          changeItem.value = !changeItem.value;
-          loading.value = false;
-          reset();
+          isLogin.value = true
+          changeItem.value = !changeItem.value
+          loading.value = false
+          reset()
         }
-      });
+      })
     }
-  });
-};
+  })
+}
 
 // 注册账户界面跳转
 const toRegister = () => {
-  isLogin.value = !isLogin.value;
-  changeItem.value = !changeItem.value;
-  reset();
-};
+  isLogin.value = !isLogin.value
+  changeItem.value = !changeItem.value
+  reset()
+}
 </script>
 
 <style lang="scss" scoped>

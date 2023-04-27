@@ -1,15 +1,17 @@
 <template>
   <div class="headerBar-container">
     <div class="button-group">
-      <el-icon color="rgb(255, 255, 255)" size="25" @click="backToLogin"><SwitchButton /></el-icon>
+      <el-icon color="rgb(255, 255, 255)" size="25" @click="backToLogin"
+        ><SwitchButton
+      /></el-icon>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 import localCache from '@/utils/LocalStorage'
-const router = useRouter();
+const router = useRouter()
 const backToLogin = () => {
   localCache.deleteCache('token')
   router.push('/login')

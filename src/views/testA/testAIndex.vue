@@ -1,5 +1,5 @@
 <template>
-   <el-input v-model="input" placeholder="Please input" @input="change" />
+  <el-input v-model="input" placeholder="Please input" @input="change" />
   <el-upload
     v-model:file-list="fileList"
     class="upload-demo"
@@ -14,7 +14,7 @@
       </div>
     </template>
   </el-upload>
-  <h1>{{fileList.length}}</h1>
+  <h1>{{ fileList.length }}</h1>
   <el-table :data="fileList" border style="width: 100%">
     <el-table-column prop="date" label="Date" width="180" />
     <el-table-column prop="name" label="Name" width="180" />
@@ -63,28 +63,27 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import type { UploadProps, UploadUserFile } from 'element-plus';
+import { ref } from 'vue'
+import type { UploadProps, UploadUserFile } from 'element-plus'
 
 const input = ref('')
-const change = (val:string | number) :void=>{
-  console.log(val);
+const change = (val: string | number): void => {
+  console.log(val)
 }
 
 const fileList = ref<UploadUserFile[]>([
   {
     name: 'food.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
   },
   {
     name: 'food2.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-  },
-]);
+    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+  }
+])
 
-const handleSuccess = ()=> {
-  console.log(fileList.value,'success');
-  
+const handleSuccess = () => {
+  console.log(fileList.value, 'success')
 }
 
 // const handleChange: UploadProps['onChange'] = (uploadFile, uploadFiles) => {
