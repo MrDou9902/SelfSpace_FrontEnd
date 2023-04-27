@@ -9,3 +9,7 @@ pnpm run dev
 ## 依赖下载方式
 
 pnpm i
+
+## 一个很不错的渐变配色网站
+
+https://webgradients.com/
