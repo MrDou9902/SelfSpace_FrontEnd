@@ -55,7 +55,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 <style lang="scss" scoped>
 .sideBar-container {
   width: 200px;
-  height: calc(100% - 50px);
+  height: 100%;
 }
 :deep(.el-menu) {
   height: 100%;

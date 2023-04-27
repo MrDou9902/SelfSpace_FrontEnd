@@ -1,11 +1,11 @@
 <template>
-  <Particles
-    id="tsparticles"
-    :particlesInit="particlesInit"
-    :particlesLoaded="particlesLoaded"
-    :options="particleOptions"
-  />
-  <div id="login">
+  <div id="login" v-loading="loading">
+    <Particles
+      id="tsparticles"
+      :particlesInit="particlesInit"
+      :particlesLoaded="particlesLoaded"
+      :options="particleOptions"
+    />
     <div id="contain">
       <Transition>
         <div v-if="changeItem" id="left-card">
@@ -76,6 +76,9 @@
         </div>
       </Transition>
     </div>
+    <footer id="footer">
+      Github: https://github.com/MrDou9902 欢迎Follow!😊
+    </footer>
   </div>
 </template>
 
@@ -88,6 +91,8 @@ import { ElMessage } from 'element-plus';
 import localCache from '@/utils/LocalStorage';
 import particleOptions from './particleOptions';
 import { loadFull } from 'tsparticles';
+
+let loading = ref(false);
 
 const particlesInit = async (engine: any) => {
   await loadFull(engine);
@@ -144,6 +149,7 @@ const signIn = async () => {
   if (!ruleFormRef.value || !isLogin.value) return;
   await ruleFormRef.value.validate((valid) => {
     if (valid) {
+      loading.value = true;
       login({
         userName: userLoginForm.userName,
         password: userLoginForm.password,
@@ -151,6 +157,7 @@ const signIn = async () => {
         if (res.code === 0) {
           localCache.setCache('token', res.result.token);
           router.push('/home');
+          loading.value = false;
         }
       });
     }
@@ -166,6 +173,7 @@ const registerFn = async () => {
         ElMessage.warning('请检查两次输入的密码是否一致！');
         return;
       }
+      loading.value = true;
       register({
         userName: userLoginForm.userName,
         password: userLoginForm.password,
@@ -173,6 +181,7 @@ const registerFn = async () => {
         if (res.code === 0) {
           isLogin.value = true;
           changeItem.value = !changeItem.value;
+          loading.value = false;
           reset();
         }
       });
@@ -292,5 +301,26 @@ const toRegister = () => {
     border-radius: 30px;
     line-height: 35px;
   }
+}
+
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  line-height: 40px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: #3333338a;
+  color: #ffffffb7;
+  font-family: Arial;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.4s ease-out;
 }
 </style>

@@ -2,3 +2,23 @@
 //   color: red;
 //   margin: 0;
 // }
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: none;
+  background: hsla(180, 3%, 41%, 0.5);
+  -webkit-box-shadow: none;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: none;
+  border-radius: 10px;
+  border: none;
+  background: #ffffff;
+  -webkit-box-shadow: none;
+}

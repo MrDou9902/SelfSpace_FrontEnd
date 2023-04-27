@@ -1,9 +1,11 @@
 <template>
   <div class="theme-container">
     <headerBar></headerBar>
-    <sideBar></sideBar>
     <div class="contain">
-      <router-view></router-view>
+      <sideBar></sideBar>
+      <div class="content">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +27,12 @@ import headerBar from '@/components/headerBar.vue';
   }
 }
 .contain {
-  flex: 1;
+  width: 100%;
+  display: flex;
+  height: calc(100% - 50px);
+  .content{
+    flex: 1;
+    overflow: auto;
+  }
 }
 </style>

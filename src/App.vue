@@ -1,7 +1,9 @@
 <template>
-  <Transition>
-    <router-view></router-view>
-  </Transition>
+  <router-view v-slot="{ Component }">
+    <Transition>
+      <component :is="Component"></component>
+    </Transition>
+  </router-view>
 </template>
 
 <script setup lang="ts"></script>
@@ -9,7 +11,7 @@
 <style lang="scss">
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.35s ease-out;
+  transition: opacity 0.2s ease;
 }
 
 .v-enter-from,

@@ -1,4 +1,5 @@
 <template>
+   <el-input v-model="input" placeholder="Please input" @input="change" />
   <el-upload
     v-model:file-list="fileList"
     class="upload-demo"
@@ -19,13 +20,56 @@
     <el-table-column prop="name" label="Name" width="180" />
     <el-table-column prop="address" label="Address" />
   </el-table>
+  <el-table :data="fileList" border style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column prop="address" label="Address" />
+  </el-table>
+  <el-table :data="fileList" border style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column prop="address" label="Address" />
+  </el-table>
+  <el-table :data="fileList" border style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column prop="address" label="Address" />
+  </el-table>
+  <el-table :data="fileList" border style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column prop="address" label="Address" />
+  </el-table>
+  <el-table :data="fileList" border style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column prop="address" label="Address" />
+  </el-table>
+  <el-table :data="fileList" border style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column prop="address" label="Address" />
+  </el-table>
+  <el-table :data="fileList" border style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column prop="address" label="Address" />
+  </el-table>
+  <el-table :data="fileList" border style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column prop="address" label="Address" />
+  </el-table>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-
 import type { UploadProps, UploadUserFile } from 'element-plus';
 
+const input = ref('')
+const change = (val:string | number) :void=>{
+  console.log(val);
+}
 
 const fileList = ref<UploadUserFile[]>([
   {

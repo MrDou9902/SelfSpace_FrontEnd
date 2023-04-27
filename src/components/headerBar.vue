@@ -8,8 +8,10 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import localCache from '@/utils/LocalStorage'
 const router = useRouter();
 const backToLogin = () => {
+  localCache.deleteCache('token')
   router.push('/login')
 }
 </script>

@@ -4,12 +4,12 @@ export default {
     repeat: 'no-repeat',
     size: 'cover',
   },
-  fpsLimit: 80,
+  fpsLimit: 120,
   interactivity: {
     events: {
       onClick: {
-        enable: false,
-        mode: 'push',
+        enable: true,
+        mode: 'repulse',
       },
       onHover: {
         enable: true,
