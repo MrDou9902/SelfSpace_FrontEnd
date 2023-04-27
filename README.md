@@ -5,7 +5,7 @@
 ## 项目启动前需配置 husky 提交规范
 
 ```sh
-pnpm run husky
+pnpm run prepare
 
 pnpm husky add .husky/pre-commit "pnpm lint && pnpm format"
 ```
