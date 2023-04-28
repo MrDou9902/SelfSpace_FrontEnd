@@ -1,9 +1,9 @@
 export default {
-  background: {
-    image: 'url(http://localhost:8000/cat&fish.webp)',
-    repeat: 'no-repeat',
-    size: 'cover'
-  },
+  // background: {
+  //   image: 'url(http://localhost:8000/cat&fish.webp)',
+  //   repeat: 'no-repeat',
+  //   size: 'cover'
+  // },
   fpsLimit: 120,
   interactivity: {
     events: {

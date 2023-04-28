@@ -1,83 +1,107 @@
 <template>
-  <div id="login" v-loading="loading">
-    <Particles
-      id="tsparticles"
-      :particlesInit="particlesInit"
-      :particlesLoaded="particlesLoaded"
-      :options="particleOptions"
-    />
-    <div id="contain">
+  <div id="login">
+    <header>
+      <backGroundMusic></backGroundMusic>
+      <div class="login-box" @click="showLoginTable">
+        <div class="login-text">
+          <span>{{ isLoginTag ? ' 收起' : '登录' }}</span>
+          <el-icon v-if="!isLoginTag">
+            <ArrowRightBold />
+          </el-icon>
+          <el-icon v-else>
+            <ArrowLeftBold />
+          </el-icon>
+        </div>
+      </div>
+    </header>
+    <article>
+      <Particles
+        id="tsParticles"
+        :particlesInit="particlesInit"
+        :particlesLoaded="particlesLoaded"
+        :options="particleOptions"
+      />
       <Transition>
-        <div v-if="changeItem" id="left-card">
-          <div class="welcome">
-            {{ isLogin ? 'Welcome Login!' : 'Welcome Register!' }}
+        <div v-if="isLoginTag" class="contain-wrapper">
+          <div class="contain">
+            <Transition>
+              <div v-if="changeItem" class="left-card">
+                <div class="welcome">
+                  {{ isLogin ? 'Welcome Login!' : 'Welcome Register!' }}
+                </div>
+              </div>
+            </Transition>
+            <Transition>
+              <div v-if="changeItem" class="right-card">
+                <el-card class="el-card">
+                  <h2 style="opacity: 0.6">
+                    {{ isLogin ? '欢迎登录' : '欢迎注册' }}
+                  </h2>
+                  <el-form
+                    ref="ruleFormRef"
+                    class="loginForm"
+                    :model="userLoginForm"
+                    :rules="rules"
+                    label-position="top"
+                    label-width="70px"
+                  >
+                    <el-form-item label="用户名" prop="userName">
+                      <el-input
+                        v-model="userLoginForm.userName"
+                        placeholder="请输入用户名"
+                      />
+                    </el-form-item>
+                    <el-form-item label="密码" prop="password">
+                      <el-input
+                        type="password"
+                        v-model="userLoginForm.password"
+                        placeholder="请输入密码"
+                        @keyup.enter="signIn"
+                      />
+                    </el-form-item>
+                    <el-form-item
+                      v-show="!isLogin"
+                      label="确认密码"
+                      prop="confirmPassword"
+                      @keyup.enter="registerFn"
+                    >
+                      <el-input
+                        type="password"
+                        v-model="userLoginForm.confirmPassword"
+                        placeholder="再次确认密码"
+                      />
+                    </el-form-item>
+                    <el-form-item class="rememberPassword">
+                      <el-link :underline="false" @click="toRegister">{{
+                        isLogin ? '注册账户' : '返回登录'
+                      }}</el-link>
+                      <el-checkbox
+                        v-if="isLogin"
+                        v-model="userLoginForm.isRemember"
+                        :true-label="1"
+                        :false-label="0"
+                        size="large"
+                        >记住密码</el-checkbox
+                      >
+                    </el-form-item>
+                  </el-form>
+                  <div class="button-group">
+                    <el-button v-if="isLogin" @click="signIn">登陆</el-button>
+                    <el-button v-else @click="registerFn">注册</el-button>
+                  </div>
+                </el-card>
+              </div>
+            </Transition>
           </div>
         </div>
       </Transition>
-      <Transition>
-        <div v-if="changeItem" id="right-card">
-          <el-card class="el-card">
-            <h2 style="opacity: 0.6">
-              {{ isLogin ? '欢迎登录' : '欢迎注册' }}
-            </h2>
-            <el-form
-              ref="ruleFormRef"
-              class="loginForm"
-              :model="userLoginForm"
-              :rules="rules"
-              label-position="top"
-              label-width="70px"
-            >
-              <el-form-item label="用户名" prop="userName">
-                <el-input
-                  v-model="userLoginForm.userName"
-                  placeholder="请输入用户名"
-                />
-              </el-form-item>
-              <el-form-item label="密码" prop="password">
-                <el-input
-                  type="password"
-                  v-model="userLoginForm.password"
-                  placeholder="请输入密码"
-                  @keyup.enter="signIn"
-                />
-              </el-form-item>
-              <el-form-item
-                v-show="!isLogin"
-                label="确认密码"
-                prop="confirmPassword"
-                @keyup.enter="registerFn"
-              >
-                <el-input
-                  type="password"
-                  v-model="userLoginForm.confirmPassword"
-                  placeholder="再次确认密码"
-                />
-              </el-form-item>
-              <el-form-item class="rememberPassword">
-                <el-link :underline="false" @click="toRegister">{{
-                  isLogin ? '注册账户' : '返回登录'
-                }}</el-link>
-                <el-checkbox
-                  v-if="isLogin"
-                  v-model="userLoginForm.isRemember"
-                  :true-label="1"
-                  :false-label="0"
-                  size="large"
-                  >记住密码</el-checkbox
-                >
-              </el-form-item>
-            </el-form>
-            <div class="button-group">
-              <el-button v-if="isLogin" @click="signIn">登陆</el-button>
-              <el-button v-else @click="registerFn">注册</el-button>
-            </div>
-          </el-card>
-        </div>
-      </Transition>
-    </div>
-    <footer id="footer">
-      Github: https://github.com/MrDou9902 欢迎Follow!😊
+    </article>
+    <footer>
+      Github: &nbsp;
+      <el-link href="https://github.com/MrDou9902" target="_blank" type="info"
+        >https://github.com/MrDou9902</el-link
+      >
+      &nbsp; 欢迎Follow!😊
     </footer>
   </div>
 </template>
@@ -91,19 +115,12 @@ import { ElMessage } from 'element-plus'
 import localCache from '@/utils/LocalStorage'
 import particleOptions from './particleOptions'
 import { loadFull } from 'tsparticles'
+import backGroundMusic from './BackgroundMusic.vue'
 
-let loading = ref(false)
-
-const particlesInit = async (engine: any) => {
-  await loadFull(engine)
-}
-
-const particlesLoaded = async (container: any) => {
-  console.log('Particles container loaded', container)
-}
-const router = useRouter()
+const loading = ref(false)
 const isLogin = ref(true)
 const changeItem = ref(true)
+const isLoginTag = ref(false)
 const userLoginForm = reactive({
   userName: '',
   password: '',
@@ -116,6 +133,22 @@ const rules = reactive<FormRules>({
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
   confirmPassword: [{ required: false, message: '请确认密码', trigger: 'blur' }]
 })
+
+const router = useRouter()
+
+// 粒子画布
+const particlesInit = async (engine: any) => {
+  await loadFull(engine)
+}
+const particlesLoaded = async (container: any) => {
+  console.log('particles has Loaded!')
+}
+
+// 右上角登录按钮
+const showLoginTable = () => {
+  isLoginTag.value = !isLoginTag.value
+  isLogin.value = isLoginTag.value
+}
 
 // 添加动画只能手动重置表单
 const reset = () => {
@@ -155,8 +188,8 @@ const signIn = async () => {
         if (res.code === 0) {
           localCache.setCache('token', res.result.token)
           router.push('/home')
-          loading.value = false
         }
+        loading.value = false
       })
     }
   })
@@ -179,9 +212,9 @@ const registerFn = async () => {
         if (res.code === 0) {
           isLogin.value = true
           changeItem.value = !changeItem.value
-          loading.value = false
           reset()
         }
+        loading.value = false
       })
     }
   })
@@ -205,13 +238,73 @@ const toRegister = () => {
   }
 }
 #login {
-  position: relative;
   width: 100vw;
   height: 100vh;
-  // background-image: url(../../assets/cat&fish.webp);
+  position: relative;
+  z-index: 0;
+}
+header {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  background-image: linear-gradient(120deg, #e0c3fc8c 0%, #8ec5fc71 100%);
+  // backdrop-filter: blur(5px);
+  box-shadow: -1px -1px 2px rgb(39, 65, 65), 5px 5px 20px aqua;
+  // animation: animate 5s linear infinite;
+  .login-box {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(20%);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 20px;
+    color: #8ec5fc;
+    background-color: #fff;
+    transition: all 0.8s ease;
+    cursor: pointer;
+    .login-text {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      transform: translate(0, -50%);
+      transition: all 1.5s ease;
+      span {
+        margin-right: 20px;
+      }
+    }
+    &:hover {
+      width: 300px;
+      height: 300px;
+      .login-text {
+        left: 100px;
+      }
+    }
+  }
+}
+article {
+  width: 100%;
+  height: calc(100% - 120px);
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
   background-size: 100% 100%;
-  // background-color: #a7a8bd;
-  #contain {
+  background-image: url(http://localhost:8000/cat&fish.webp);
+  background-size: cover;
+  .contain {
+    display: flex;
+    text-align: center;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -225,100 +318,96 @@ const toRegister = () => {
     box-shadow: -5px -5px 10px rgb(39, 65, 65), 5px 5px 20px aqua;
     /* 5秒 infinite循环播放无限次 linear匀速  */
     animation: animate 5s linear infinite;
-  }
-}
-#contain {
-  display: flex;
-  // flex-direction: row;
-  text-align: center;
-  // align-items: center;
-  #left-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-top-left-radius: 225px;
-    border-bottom-left-radius: 225px;
-    width: 500px;
-    font-size: 50px;
-    font-weight: bold;
-    color: aliceblue;
-    h1 {
-      color: white;
-      white-space: nowrap;
-    }
-    span {
-      font-size: 1.2rem;
-      text-align: center;
-      color: white;
-      white-space: nowrap;
-    }
-    .welcome {
+    .left-card {
+      width: 500px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      height: 30%;
-      border-radius: 100px;
-      background-image: linear-gradient(to top, #fad0c4bd 0%, #ffd1ffa1 100%);
+      border-top-left-radius: 225px;
+      border-bottom-left-radius: 225px;
+      font-size: 50px;
+      font-weight: bold;
+      color: aliceblue;
+      h1 {
+        color: white;
+        white-space: nowrap;
+      }
+      span {
+        font-size: 1.2rem;
+        text-align: center;
+        color: white;
+        white-space: nowrap;
+      }
+      .welcome {
+        height: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100px;
+        background-image: linear-gradient(to top, #fad0c4bd 0%, #ffd1ffa1 100%);
+      }
     }
-  }
-  #right-card {
-    padding: 20px 0;
-    width: 400px;
-    .el-card {
-      margin: 0 30px;
-      width: 70%;
-      border-radius: 25px;
-      background-color: rgba(255, 255, 255, 0.1);
-      .el-checkbox {
-        color: #333;
+    .right-card {
+      width: 400px;
+      padding: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .el-card {
+        width: 70%;
+        margin: 0 30px;
+        border-radius: 25px;
+        background-color: rgba(255, 255, 255, 0.1);
+        .el-checkbox {
+          color: #333;
+        }
+      }
+      h2 {
+        margin-bottom: 10px;
+      }
+      .loginForm {
+        .rememberPassword :deep(.el-form-item__content) {
+          justify-content: space-around;
+        }
+        :deep(.el-input .el-input__wrapper) {
+          height: 35px;
+          border-radius: 18px;
+          font-size: inherit;
+          line-height: 35px;
+        }
+      }
+      .el-button {
+        width: 80%;
+        height: 2rem;
+        border-radius: 30px;
+        line-height: 35px;
       }
     }
   }
 }
-#right-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  h2 {
-    margin-bottom: 10px;
-  }
-  .loginForm {
-    .rememberPassword :deep(.el-form-item__content) {
-      justify-content: space-around;
-    }
-    :deep(.el-input .el-input__wrapper) {
-      border-radius: 18px;
-      font-size: inherit;
-      height: 35px;
-      line-height: 35px;
-    }
-  }
-  .el-button {
-    width: 80%;
-    height: 2rem;
-    border-radius: 30px;
-    line-height: 35px;
-  }
-}
-
-#footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+footer {
+  width: 100%;
   height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   line-height: 40px;
   position: fixed;
   bottom: 0;
-  width: 100%;
-  text-align: center;
+  z-index: 2;
   background: #3333338a;
   color: #ffffffb7;
   font-family: Arial;
   font-size: 12px;
   letter-spacing: 1px;
+  .el-link {
+    color: #ada7a7;
+  }
 }
+
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.4s ease-out;
+  transition: opacity 0.4s ease;
 }
 </style>

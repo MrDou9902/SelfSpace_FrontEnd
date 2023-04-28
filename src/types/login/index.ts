@@ -17,3 +17,10 @@ export interface loginReq {
   password?: string
   verifyCode?: string
 }
+
+export interface musicArrTypes {
+  musicArr: Array<{
+    url: string
+  }>
+  musicCount: number
+}
