@@ -83,6 +83,9 @@ const pause = () => {
   }
 }
 :deep(.el-slider__button-wrapper) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   .el-slider__button {
     width: 10px;
