@@ -1,6 +1,7 @@
 <template>
   <div id="login">
     <header>
+      <imgGroup></imgGroup>
       <backGroundMusic></backGroundMusic>
       <div class="login-box" @click="showLoginTable">
         <div class="login-text">
@@ -116,6 +117,7 @@ import localCache from '@/utils/LocalStorage'
 import particleOptions from './particleOptions'
 import { loadFull } from 'tsparticles'
 import backGroundMusic from './BackgroundMusic.vue'
+import imgGroup from './ImgGroup.vue'
 
 const loading = ref(false)
 const isLogin = ref(true)
@@ -252,9 +254,9 @@ header {
   position: fixed;
   top: 0;
   z-index: 1;
-  background-image: linear-gradient(120deg, #e0c3fc8c 0%, #8ec5fc71 100%);
-  // backdrop-filter: blur(5px);
-  box-shadow: -1px -1px 2px rgb(39, 65, 65), 5px 5px 20px aqua;
+  background-image: linear-gradient(120deg, #e0c3fc3c 0%, #8ec5fc43 100%);
+  backdrop-filter: blur(5px);
+  // box-shadow: -1px -1px 2px rgb(39, 65, 65), 5px 5px 20px aqua;
   // animation: animate 5s linear infinite;
   .login-box {
     width: 150px;
@@ -265,10 +267,10 @@ header {
     transform: translateX(20%);
     border-radius: 50%;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 23px;
     color: #8ec5fc;
     background-color: #fff;
-    transition: all 0.8s ease;
+    transition: all 0.6s ease;
     cursor: pointer;
     .login-text {
       width: 100%;
@@ -281,7 +283,7 @@ header {
       transform: translate(0, -50%);
       transition: all 1.5s ease;
       span {
-        margin-right: 20px;
+        margin-right: 15px;
       }
     }
     &:hover {
