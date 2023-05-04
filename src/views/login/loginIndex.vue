@@ -16,6 +16,15 @@
       </div>
     </header>
     <article>
+      <!-- <BackGroundEchart></BackGroundEchart> -->
+      <div class="words">
+        <Transition name="slide-fade-first">
+          <span v-if="firstWords">Stay True To The Original Aspiration </span>
+        </Transition>
+        <Transition name="slide-fade-last">
+          <span v-if="lastWords">Just Keep Stepping Forward</span>
+        </Transition>
+      </div>
       <Particles
         id="tsParticles"
         :particlesInit="particlesInit"
@@ -109,7 +118,7 @@
 
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { login, register } from '@/api/login'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
@@ -118,7 +127,10 @@ import particleOptions from './particleOptions'
 import { loadFull } from 'tsparticles'
 import backGroundMusic from './BackgroundMusic.vue'
 import imgGroup from './ImgGroup.vue'
+import BackGroundEchart from './BackGroundEchart.vue'
 
+const firstWords = ref(false)
+const lastWords = ref(false)
 const loading = ref(false)
 const isLogin = ref(true)
 const changeItem = ref(true)
@@ -138,11 +150,20 @@ const rules = reactive<FormRules>({
 
 const router = useRouter()
 
+onMounted(() => {
+  setTimeout(() => {
+    firstWords.value = true
+  }, 1000)
+  setTimeout(() => {
+    lastWords.value = true
+  }, 2000)
+})
+
 // 粒子画布
 const particlesInit = async (engine: any) => {
   await loadFull(engine)
 }
-const particlesLoaded = async (container: any) => {
+const particlesLoaded = async () => {
   console.log('particles has Loaded!')
 }
 
@@ -295,15 +316,43 @@ header {
     }
   }
 }
+/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: 'font';
+  font-weight: 400;
+  src: url('//at.alicdn.com/wf/webfont/q7U3AhN2ySDA/LCgYTYCqab7v.woff2')
+      format('woff2'),
+    url('//at.alicdn.com/wf/webfont/q7U3AhN2ySDA/xXgWeFGHB9fA.woff')
+      format('woff');
+  font-display: swap;
+}
 article {
   width: 100%;
   height: calc(100% - 120px);
+  display: flex;
+  justify-content: center;
   position: absolute;
   bottom: 0;
   z-index: 2;
   background-size: 100% 100%;
-  background-image: url(http://localhost:8000/cat&fish.webp);
+  // background-image: url(http://localhost:8000/cat&fish.webp);
+  // background-color: #9b9696;
+  background-color: #fff;
   background-size: cover;
+  .words {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    span {
+      width: 100%;
+      font-size: 60px;
+      text-align: center;
+      color: #9b89a8a8;
+      margin-bottom: 60px;
+      font-family: 'font';
+    }
+  }
   .contain {
     display: flex;
     text-align: center;
@@ -317,7 +366,8 @@ article {
     border: 1px solid rgba(146, 145, 145, 0.2);
     background-color: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(5px);
-    box-shadow: -5px -5px 10px rgb(39, 65, 65), 5px 5px 20px aqua;
+    box-shadow: 0px 0px 10px rgba(95, 87, 114, 0.486),
+      5px 5px 20px rgb(193, 218, 218);
     /* 5秒 infinite循环播放无限次 linear匀速  */
     animation: animate 5s linear infinite;
     .left-card {
@@ -411,5 +461,23 @@ footer {
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.4s ease;
+}
+.slide-fade-last-leave-active,
+.slide-fade-first-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-first-enter-active,
+.slide-fade-last-enter-active {
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-last-enter-from,
+.slide-fade-last-leave-to {
+  transform: translateX(100px);
+  opacity: 0;
+}
+.slide-fade-first-enter-from,
+.slide-fade-first-leave-to {
+  transform: translateX(-100px);
+  opacity: 0;
 }
 </style>

@@ -8,9 +8,9 @@
 </template>
 
 <script lang="ts" setup>
-import img1 from './图片1.png'
-import img2 from './图片2.png'
-import img4 from './图片4.png'
+import img1 from '@/assets/图片1.png'
+import img2 from '@/assets/图片2.png'
+import img4 from '@/assets/图片4.png'
 </script>
 
 <style lang="scss" scoped>

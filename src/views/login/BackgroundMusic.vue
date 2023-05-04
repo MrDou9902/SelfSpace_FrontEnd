@@ -40,7 +40,7 @@
 
 <script lang="ts" setup>
 import playImg from '@/assets/bgc2.webp'
-import music from './Adele - Rolling in the Deep(1).mp3'
+import music from '@/assets/Adele - Rolling in the Deep(1).mp3'
 import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 
 const currentTime = ref('00:00')
