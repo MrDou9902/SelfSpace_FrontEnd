@@ -19,10 +19,14 @@
       <!-- <BackGroundEchart></BackGroundEchart> -->
       <div class="words">
         <Transition name="slide-fade-first">
-          <span v-if="firstWords">Stay True To The Original Aspiration </span>
+          <span v-if="firstWords && !isLoginTag"
+            >Stay True To The Original Aspiration
+          </span>
         </Transition>
         <Transition name="slide-fade-last">
-          <span v-if="lastWords">Just Keep Stepping Forward</span>
+          <span v-if="lastWords && !isLoginTag"
+            >Just Keep Stepping Forward</span
+          >
         </Transition>
       </div>
       <Particles
