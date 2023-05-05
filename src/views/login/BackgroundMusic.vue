@@ -5,33 +5,33 @@
     </div>
     <div class="play-controls">
       <div class="music-detail">
-        <span> {{ ' ' + musicName + ' ' }}</span>
+        <span> {{ ' ' + bgmNow.musicName + ' ' }}</span>
       </div>
-      <span class="time-process">{{ currentTime }} / {{ allTime }}</span>
+      <span class="time-process">{{ currentTime }} / {{ bgmNow.allTime }}</span>
       <el-slider
         v-model="sliderValue"
         :show-tooltip="false"
-        :max="sliderLength"
+        :max="bgmNow.sliderLength"
         :disabled="sliderDisabled"
         @change="sliderChange"
         @input="sliderMousedownChange"
       />
       <div class="icon-group">
-        <el-icon><ArrowLeftBold /></el-icon>
+        <el-icon @click="preOne"><ArrowLeftBold /></el-icon>
         <el-icon class="specialIcon" v-if="!isPlaying" @click="play"
           ><CaretRight
         /></el-icon>
         <el-icon class="specialIcon" v-else @click="pause"
           ><VideoPause
         /></el-icon>
-        <el-icon><ArrowRightBold /></el-icon>
+        <el-icon @click="nextOne"><ArrowRightBold /></el-icon>
       </div>
     </div>
     <audio
       ref="musicAudio"
       class="audio-component"
       preload="auto"
-      :src="bgmNow"
+      :src="bgmNow.src"
       @durationchange="durationchange"
       @timeupdate="timeupdate"
     />
@@ -40,19 +40,16 @@
 
 <script lang="ts" setup>
 import playImg from '@/assets/bgc2.webp'
-import music from '@/assets/Adele - Rolling in the Deep(1).mp3'
-import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { musicList, singleMusic } from './musicList'
+import { ref } from 'vue'
 
 const currentTime = ref('00:00')
-const allTime = ref('00:00')
-const sliderLength = ref(0)
-const bgmList = ref([music])
 const sliderValue = ref(0)
 const musicAudio = ref()
 const sliderDisabled = ref(true)
-const bgmNow = ref(bgmList.value[0])
+const index = ref(0)
+const bgmNow = ref<singleMusic>(musicList[index.value])
 const isPlaying = ref(false)
-const musicName = ref('暂无歌曲')
 const isHold = ref(false)
 
 // 时间格式转换
@@ -90,15 +87,16 @@ const timeupdate = () => {
   if (!isHold.value) {
     currentTime.value = timeFormat(musicAudio.value.currentTime)
     sliderValue.value = Math.floor(musicAudio.value.currentTime)
+    if (sliderValue.value === bgmNow.value.sliderLength) {
+      sliderValue.value = 0
+      nextOne()
+    }
   }
 }
 
 // 播放按钮
 const play = () => {
   sliderDisabled.value = false
-  musicName.value = 'Adele - Rolling in the Deep'
-  allTime.value = '03:48'
-  sliderLength.value = 228
   musicAudio.value.play()
   isPlaying.value = true
 }
@@ -107,6 +105,22 @@ const play = () => {
 const pause = () => {
   musicAudio.value.pause()
   isPlaying.value = false
+}
+
+// 上一首按钮
+const preOne = async () => {
+  isPlaying.value = true
+  index.value = (index.value - 1 + musicList.length) % musicList.length
+  await (bgmNow.value = musicList[index.value])
+  musicAudio.value.play()
+}
+
+// 下一首按钮
+const nextOne = async () => {
+  isPlaying.value = true
+  index.value = (index.value + 1) % musicList.length
+  await (bgmNow.value = musicList[index.value])
+  musicAudio.value.play()
 }
 </script>
 
