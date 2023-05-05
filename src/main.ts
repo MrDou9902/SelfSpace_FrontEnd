@@ -23,5 +23,5 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(ElementPlus, {
   locale: zhCn
 })
-app.use(Particles)
+Particles(app, {})
 app.mount('#app')
