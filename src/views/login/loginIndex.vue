@@ -16,7 +16,6 @@
       </div>
     </header>
     <article>
-      <!-- <BackGroundEchart></BackGroundEchart> -->
       <div class="words">
         <Transition name="slide-fade-first">
           <span v-if="firstWords && !isLoginTag"
@@ -89,13 +88,11 @@
                       <el-link :underline="false" @click="toRegister">{{
                         isLogin ? '注册账户' : '返回登录'
                       }}</el-link>
-                      <el-checkbox
+                      <el-link
                         v-if="isLogin"
-                        v-model="userLoginForm.isRemember"
-                        :true-label="1"
-                        :false-label="0"
-                        size="large"
-                        >记住密码</el-checkbox
+                        :underline="false"
+                        @click="forgetPassword"
+                        >忘记密码？</el-link
                       >
                     </el-form-item>
                   </el-form>
@@ -109,6 +106,10 @@
           </div>
         </div>
       </Transition>
+      <ForgetPassWord
+        :dialog-visible="dialogVisible"
+        @closeDialog="closeDialog"
+      ></ForgetPassWord>
     </article>
     <footer>
       Github: &nbsp;
@@ -131,9 +132,10 @@ import particleOptions from './particleOptions'
 import { loadFull } from 'tsparticles'
 import backGroundMusic from './BackgroundMusic.vue'
 import imgGroup from './ImgGroup.vue'
-import BackGroundEchart from './BackGroundEchart.vue'
+import ForgetPassWord from './ForgetPassWord.vue'
 
 const firstWords = ref(false)
+const dialogVisible = ref(false)
 const lastWords = ref(false)
 const loading = ref(false)
 const isLogin = ref(true)
@@ -142,7 +144,6 @@ const isLoginTag = ref(false)
 const userLoginForm = reactive({
   userName: '',
   password: '',
-  isRemember: 0,
   confirmPassword: ''
 })
 const ruleFormRef = ref<FormInstance>()
@@ -151,8 +152,6 @@ const rules = reactive<FormRules>({
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
   confirmPassword: [{ required: false, message: '请确认密码', trigger: 'blur' }]
 })
-
-const router = useRouter()
 
 onMounted(() => {
   setTimeout(() => {
@@ -164,7 +163,7 @@ onMounted(() => {
 })
 
 // 粒子画布
-const particlesInit = async (engine: any) => {
+const particlesInit = async (engine: unknown) => {
   await loadFull(engine)
 }
 const particlesLoaded = async () => {
@@ -197,13 +196,6 @@ const reset = () => {
 
 // 登录
 const signIn = async () => {
-  console.log(
-    ruleFormRef.value,
-    isLogin.value,
-    !ruleFormRef.value || !isLogin.value,
-    rules
-  )
-
   if (!ruleFormRef.value || !isLogin.value) return
   await ruleFormRef.value.validate((valid) => {
     if (valid) {
@@ -214,6 +206,7 @@ const signIn = async () => {
       }).then((res) => {
         if (res.code === 0) {
           localCache.setCache('token', res.result.token)
+          const router = useRouter()
           router.push('/home')
         }
         loading.value = false
@@ -253,6 +246,15 @@ const toRegister = () => {
   changeItem.value = !changeItem.value
   reset()
 }
+
+// 忘记密码
+const forgetPassword = () => {
+  dialogVisible.value = true
+}
+
+const closeDialog = () => {
+  dialogVisible.value = false
+}
 </script>
 
 <style lang="scss" scoped>
@@ -269,6 +271,7 @@ const toRegister = () => {
   height: 100vh;
   position: relative;
   z-index: 0;
+  user-select: none;
 }
 header {
   width: 100%;
@@ -344,7 +347,6 @@ article {
   background-color: #fff;
   background-size: cover;
   .words {
-    user-select: none;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -370,9 +372,8 @@ article {
     border: 1px solid rgba(146, 145, 145, 0.2);
     background-color: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(5px);
-    box-shadow: 0px 0px 10px rgba(95, 87, 114, 0.486),
+    box-shadow: 0px 0px 10px rgba(218, 215, 225, 0.781),
       5px 5px 20px rgb(193, 218, 218);
-    /* 5秒 infinite循环播放无限次 linear匀速  */
     animation: animate 5s linear infinite;
     .left-card {
       width: 500px;
@@ -458,7 +459,37 @@ footer {
   font-size: 12px;
   letter-spacing: 1px;
   .el-link {
-    color: #ada7a7;
+    color: #ffc4c4;
+  }
+}
+
+:deep(.el-dialog) {
+  width: 400px;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 25px;
+  border: 1px solid rgba(146, 145, 145, 0.2);
+  background-color: rgba(246, 247, 244, 0.904) !important;
+  backdrop-filter: blur(5px);
+  box-shadow: 0px 0px 10px rgba(218, 215, 225, 0.781),
+    5px 5px 20px rgb(193, 218, 218);
+  animation: animate 5s linear infinite;
+  .el-dialog__footer {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .el-dialog__header {
+    margin: 0;
+    padding-bottom: 10px;
+    .el-dialog__title {
+      color: #5b5d5f;
+      font-weight: bold;
+    }
   }
 }
 

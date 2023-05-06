@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import playImg from '@/assets/bgc2.webp'
+import playImg from '@/assets/musicImg.jpg'
 import { musicList, singleMusic } from './musicList'
 import { ref } from 'vue'
 
@@ -66,7 +66,7 @@ const timeFormat = (timeNumber: number): string => {
 
 // 播放中钩子
 const durationchange = () => {
-  console.log(musicAudio.value.currentTime)
+  console.log('BGM播放中...')
 }
 
 // 滑块鼠标按下时钩子
@@ -79,7 +79,6 @@ const sliderMousedownChange = (val: number) => {
 const sliderChange = (val: number) => {
   isHold.value = false
   musicAudio.value.currentTime = val
-  console.log(musicAudio.value.currentTime, val)
 }
 
 // 播放中钩子，每0.25s触发一次
