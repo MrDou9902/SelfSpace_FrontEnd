@@ -17,7 +17,7 @@ export const musicList: Array<singleMusic> = [
     sliderLength: 206
   },
   {
-    musicName: 'Valentin (ヴァレンティン) - A Little Story',
+    musicName: 'FuGa pang - 【FREE】lucky',
     src: music2,
     allTime: '02:37',
     sliderLength: 157

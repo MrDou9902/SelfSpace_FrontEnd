@@ -195,6 +195,7 @@ const reset = () => {
 }
 
 // 登录
+const router = useRouter()
 const signIn = async () => {
   if (!ruleFormRef.value || !isLogin.value) return
   await ruleFormRef.value.validate((valid) => {
@@ -206,7 +207,6 @@ const signIn = async () => {
       }).then((res) => {
         if (res.code === 0) {
           localCache.setCache('token', res.result.token)
-          const router = useRouter()
           router.push('/home')
         }
         loading.value = false
@@ -335,11 +335,11 @@ header {
 }
 article {
   width: 100%;
-  height: calc(100% - 120px);
+  height: calc(100% - 160px);
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 0;
+  bottom: 40px;
   z-index: 2;
   background-size: 100% 100%;
   // background-image: url(http://localhost:8000/cat&fish.webp);
@@ -466,6 +466,11 @@ footer {
 :deep(.el-dialog) {
   width: 400px;
   padding: 20px 0;
+  margin: 0;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -485,10 +490,11 @@ footer {
   }
   .el-dialog__header {
     margin: 0;
-    padding-bottom: 10px;
+    padding: 0 0 10px 0;
     .el-dialog__title {
       color: #5b5d5f;
       font-weight: bold;
+      font-size: 22px;
     }
   }
 }

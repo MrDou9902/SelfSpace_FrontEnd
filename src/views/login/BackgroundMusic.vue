@@ -134,11 +134,11 @@ const nextOne = async () => {
 }
 @keyframes bgmTitleScroll {
   from {
-    transform: translateX(-100%);
-    left: 0;
+    left: 100%;
   }
   to {
-    left: 100%;
+    transform: translateX(-100%);
+    left: 0;
   }
 }
 .music-player-wrapper {
@@ -185,7 +185,7 @@ const nextOne = async () => {
         overflow: hidden;
         white-space: nowrap;
         min-width: 150px;
-        animation: bgmTitleScroll 5s linear infinite;
+        animation: bgmTitleScroll 6s linear infinite;
       }
     }
     .icon-group {

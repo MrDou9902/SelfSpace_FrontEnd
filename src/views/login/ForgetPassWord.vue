@@ -74,12 +74,12 @@ const confirm = async () => {
         password: resetForm.password
       }).then((res) => {
         if (res.code === 0) {
-          // copyText(res.result)
-          // ElMessage({
-          //   showClose: true,
-          //   message: '您的密码已复制到粘贴板哦，下次可别忘记啦~',
-          //   type: 'warning'
-          // })
+          copyText(resetForm.password)
+          ElMessage({
+            showClose: true,
+            message: '您的密码已复制到粘贴板哦，下次可别忘记啦~',
+            type: 'warning'
+          })
           closeDialog()
         }
       })
