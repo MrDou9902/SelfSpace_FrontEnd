@@ -1,5 +1,7 @@
 <template>
-  <h1>做点啥呢...</h1>
+  <Transition>
+    <router-view></router-view>
+  </Transition>
 </template>
 
 <script setup lang="ts"></script>
