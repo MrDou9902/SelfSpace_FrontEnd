@@ -1,8 +1,8 @@
 <template>
   <div id="login">
     <header>
-      <imgGroup></imgGroup>
-      <backGroundMusic></backGroundMusic>
+      <imgGroup />
+      <backGroundMusic @playingStatusChange="playingStatusChange" />
       <div class="login-box" @click="showLoginTable">
         <div class="login-text">
           <span>{{ isLoginTag ? ' 收起' : '登录' }}</span>
@@ -16,6 +16,7 @@
       </div>
     </header>
     <article>
+      <cornerAnimation v-if="isPlaying" />
       <div class="words">
         <Transition name="slide-fade-first">
           <span v-if="firstWords && !isLoginTag"
@@ -124,18 +125,20 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
 import { onMounted, reactive, ref } from 'vue'
-import { login, register } from '@/api/login'
 import type { FormInstance, FormRules } from 'element-plus'
+import { loadFull } from 'tsparticles'
 import { ElMessage } from 'element-plus'
+import { login, register } from '@/api/login'
 import localCache from '@/utils/LocalStorage'
 import particleOptions from './particleOptions'
-import { loadFull } from 'tsparticles'
 import backGroundMusic from './BackgroundMusic.vue'
 import imgGroup from './ImgGroup.vue'
 import ForgetPassWord from './ForgetPassWord.vue'
+import cornerAnimation from './cornerAnimation.vue'
 
 const firstWords = ref(false)
 const dialogVisible = ref(false)
+const isPlaying = ref(false)
 const lastWords = ref(false)
 const loading = ref(false)
 const isLogin = ref(true)
@@ -161,6 +164,11 @@ onMounted(() => {
     lastWords.value = true
   }, 2000)
 })
+
+// 开关四个角动画
+const playingStatusChange = (val: boolean) => {
+  isPlaying.value = val
+}
 
 // 粒子画布
 const particlesInit = async (engine: unknown) => {
@@ -266,6 +274,15 @@ const closeDialog = () => {
     filter: hue-rotate(360deg);
   }
 }
+@font-face {
+  font-family: 'font';
+  font-weight: 400;
+  src: url('//at.alicdn.com/wf/webfont/q7U3AhN2ySDA/LCgYTYCqab7v.woff2')
+      format('woff2'),
+    url('//at.alicdn.com/wf/webfont/q7U3AhN2ySDA/xXgWeFGHB9fA.woff')
+      format('woff');
+  font-display: swap;
+}
 #login {
   width: 100vw;
   height: 100vh;
@@ -323,20 +340,11 @@ header {
     }
   }
 }
-/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
-@font-face {
-  font-family: 'font';
-  font-weight: 400;
-  src: url('//at.alicdn.com/wf/webfont/q7U3AhN2ySDA/LCgYTYCqab7v.woff2')
-      format('woff2'),
-    url('//at.alicdn.com/wf/webfont/q7U3AhN2ySDA/xXgWeFGHB9fA.woff')
-      format('woff');
-  font-display: swap;
-}
+
 article {
   width: 100%;
   height: calc(100% - 160px);
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
@@ -347,33 +355,6 @@ article {
   background-size: 100% 100%;
   background-color: #fff;
   background-size: cover;
-  // .click-button {
-  //   position: relative;
-  //   z-index: 1;
-  //   border: none;
-  //   outline: none;
-  //   padding: 0.5em 1em;
-  //   color: white;
-  //   background-color: #1890ff;
-  //   &::before {
-  //     content: '';
-  //     position: absolute;
-  //     z-index: -1;
-  //     top: 0;
-  //     left: 0;
-  //     bottom: 0;
-  //     right: 0;
-  //     border: 4px solid #1890ff;
-  //     transform: scale(1);
-  //     transform-origin: center;
-  //   }
-  //   &:hover::before {
-  //     transition: all 0.75s ease-out;
-  //     border: 1px solid#e6f7ff;
-  //     transform: scale(1.9);
-  //     opacity: 0;
-  //   }
-  // }
   .words {
     display: flex;
     justify-content: center;

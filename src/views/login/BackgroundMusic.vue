@@ -52,6 +52,13 @@ const bgmNow = ref<singleMusic>(musicList[index.value])
 const isPlaying = ref(false)
 const isHold = ref(false)
 
+const emit = defineEmits(['playingStatusChange'])
+
+// 向主页专递是否正在播放BGM标识
+const changePlayingStatus = (isPlaying: boolean) => {
+  emit('playingStatusChange', isPlaying)
+}
+
 // 时间格式转换
 const timeFormat = (timeNumber: number): string => {
   const currTime = Math.floor(timeNumber)
@@ -100,12 +107,14 @@ const play = () => {
   sliderDisabled.value = false
   musicAudio.value.play()
   isPlaying.value = true
+  changePlayingStatus(isPlaying.value)
 }
 
 // 暂停按钮
 const pause = () => {
   musicAudio.value.pause()
   isPlaying.value = false
+  changePlayingStatus(isPlaying.value)
 }
 
 // 上一首/下一首按钮
@@ -151,7 +160,7 @@ const changeBGM = async (type: boolean) => {
     width: 70px;
     height: 70px;
     left: 20px;
-    opacity: 0.8;
+    opacity: 0.7;
     margin-top: 60px;
     animation: rotate 15s linear infinite;
     img {
