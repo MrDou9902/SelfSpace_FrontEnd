@@ -167,7 +167,7 @@ const particlesInit = async (engine: unknown) => {
   await loadFull(engine)
 }
 const particlesLoaded = async () => {
-  console.log('particles has Loaded!')
+  console.log('粒子效果已渲染！')
 }
 
 // 右上角登录按钮
@@ -336,16 +336,44 @@ header {
 article {
   width: 100%;
   height: calc(100% - 160px);
+  overflow-y: auto;
   display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
   justify-content: center;
   position: absolute;
   bottom: 40px;
   z-index: 2;
   background-size: 100% 100%;
-  // background-image: url(http://localhost:8000/cat&fish.webp);
-  // background-color: #9b9696;
   background-color: #fff;
   background-size: cover;
+  // .click-button {
+  //   position: relative;
+  //   z-index: 1;
+  //   border: none;
+  //   outline: none;
+  //   padding: 0.5em 1em;
+  //   color: white;
+  //   background-color: #1890ff;
+  //   &::before {
+  //     content: '';
+  //     position: absolute;
+  //     z-index: -1;
+  //     top: 0;
+  //     left: 0;
+  //     bottom: 0;
+  //     right: 0;
+  //     border: 4px solid #1890ff;
+  //     transform: scale(1);
+  //     transform-origin: center;
+  //   }
+  //   &:hover::before {
+  //     transition: all 0.75s ease-out;
+  //     border: 1px solid#e6f7ff;
+  //     transform: scale(1.9);
+  //     opacity: 0;
+  //   }
+  // }
   .words {
     display: flex;
     justify-content: center;

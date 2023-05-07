@@ -17,14 +17,14 @@
         @input="sliderMousedownChange"
       />
       <div class="icon-group">
-        <el-icon @click="preOne"><ArrowLeftBold /></el-icon>
+        <el-icon @click="changeBGM(false)"><ArrowLeftBold /></el-icon>
         <el-icon class="specialIcon" v-if="!isPlaying" @click="play"
           ><CaretRight
         /></el-icon>
         <el-icon class="specialIcon" v-else @click="pause"
           ><VideoPause
         /></el-icon>
-        <el-icon @click="nextOne"><ArrowRightBold /></el-icon>
+        <el-icon @click="changeBGM(true)"><ArrowRightBold /></el-icon>
       </div>
     </div>
     <audio
@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import playImg from '@/assets/musicImg.jpg'
+import playImg from '@/assets/img/musicImg.jpg'
 import { musicList, singleMusic } from './musicList'
 import { ref } from 'vue'
 
@@ -66,7 +66,7 @@ const timeFormat = (timeNumber: number): string => {
 
 // 播放中钩子
 const durationchange = () => {
-  console.log('BGM播放中...')
+  console.log('BGM开始播放...')
 }
 
 // 滑块鼠标按下时钩子
@@ -84,11 +84,13 @@ const sliderChange = (val: number) => {
 // 播放中钩子，每0.25s触发一次
 const timeupdate = () => {
   if (!isHold.value) {
-    currentTime.value = timeFormat(musicAudio.value.currentTime)
-    sliderValue.value = Math.floor(musicAudio.value.currentTime)
+    musicAudio.value.currentTime &&
+      (currentTime.value = timeFormat(musicAudio.value.currentTime))
+    musicAudio.value.currentTime &&
+      (sliderValue.value = Math.floor(musicAudio.value.currentTime))
     if (sliderValue.value === bgmNow.value.sliderLength) {
       sliderValue.value = 0
-      nextOne()
+      changeBGM(true)
     }
   }
 }
@@ -106,18 +108,11 @@ const pause = () => {
   isPlaying.value = false
 }
 
-// 上一首按钮
-const preOne = async () => {
+// 上一首/下一首按钮
+const changeBGM = async (type: boolean) => {
   isPlaying.value = true
-  index.value = (index.value - 1 + musicList.length) % musicList.length
-  await (bgmNow.value = musicList[index.value])
-  musicAudio.value.play()
-}
-
-// 下一首按钮
-const nextOne = async () => {
-  isPlaying.value = true
-  index.value = (index.value + 1) % musicList.length
+  index.value =
+    (index.value + (type ? 1 : musicList.length - 1)) % musicList.length
   await (bgmNow.value = musicList[index.value])
   musicAudio.value.play()
 }

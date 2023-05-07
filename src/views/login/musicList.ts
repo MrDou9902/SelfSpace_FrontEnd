@@ -1,6 +1,6 @@
-import music1 from '@/assets/A Little Story.mp3'
-import music2 from '@/assets/FuGa pang - 【FREE】lucky.ogg'
-import music3 from '@/assets/増田俊郎 (ますだ としお) - 「籠のなか」 (笼之中).mp3'
+import music1 from '@/assets/music/A Little Story.mp3'
+import music2 from '@/assets/music/FuGa pang - 【FREE】lucky.ogg'
+import music3 from '@/assets/music/増田俊郎 (ますだ としお) - 「籠のなか」 (笼之中).mp3'
 
 export interface singleMusic {
   musicName: string
