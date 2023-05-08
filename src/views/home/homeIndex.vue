@@ -1,7 +1,9 @@
 <template>
-  <h1>做点啥呢...</h1>
+  <homeHeader />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import homeHeader from '@/components/homeHeader.vue'
+</script>
 
 <style lang="scss" scoped></style>

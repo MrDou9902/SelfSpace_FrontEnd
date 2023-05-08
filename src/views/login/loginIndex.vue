@@ -16,7 +16,7 @@
       </div>
     </header>
     <article>
-      <cornerAnimation v-if="isPlaying" />
+      <CornerAnimation v-if="isPlaying" />
       <div class="words">
         <Transition name="slide-fade-first">
           <span v-if="firstWords && !isLoginTag"
@@ -63,6 +63,16 @@
                       <el-input
                         v-model="userLoginForm.userName"
                         placeholder="请输入用户名"
+                      />
+                    </el-form-item>
+                    <el-form-item
+                      v-show="!isLogin"
+                      label="昵称"
+                      prop="nickName"
+                    >
+                      <el-input
+                        v-model="userLoginForm.nickName"
+                        placeholder="请告诉我该如何称呼您哦~"
                       />
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
@@ -134,7 +144,7 @@ import particleOptions from './particleOptions'
 import backGroundMusic from './BackgroundMusic.vue'
 import imgGroup from './ImgGroup.vue'
 import ForgetPassWord from './ForgetPassWord.vue'
-import cornerAnimation from './cornerAnimation.vue'
+import CornerAnimation from './CornerAnimation.vue'
 
 const firstWords = ref(false)
 const dialogVisible = ref(false)
@@ -147,7 +157,8 @@ const isLoginTag = ref(false)
 const userLoginForm = reactive({
   userName: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
+  nickName: ''
 })
 const ruleFormRef = ref<FormInstance>()
 const rules = reactive<FormRules>({
@@ -189,13 +200,18 @@ const reset = () => {
   setTimeout(() => {
     changeItem.value = !changeItem.value
     userLoginForm.confirmPassword = ''
+    userLoginForm.nickName = ''
     userLoginForm.userName = ''
     userLoginForm.password = ''
     if (isLogin.value) {
       rules.confirmPassword = []
+      rules.nickName = []
     } else {
       rules.confirmPassword = [
         { required: true, message: '请确认密码', trigger: 'blur' }
+      ]
+      rules.nickName = [
+        { required: true, message: '请告诉我该如何称呼您哦~', trigger: 'blur' }
       ]
     }
     ruleFormRef.value?.resetFields()
@@ -215,6 +231,8 @@ const signIn = async () => {
       }).then((res) => {
         if (res.code === 0) {
           localCache.setCache('token', res.result.token)
+          localCache.setCache('userId', res.result.id)
+          localCache.setCache('nickName', res.result.nickName)
           router.push('/home')
         }
         loading.value = false
@@ -235,7 +253,8 @@ const registerFn = async () => {
       loading.value = true
       register({
         userName: userLoginForm.userName,
-        password: userLoginForm.password
+        password: userLoginForm.password,
+        nickName: userLoginForm.nickName
       }).then((res) => {
         if (res.code === 0) {
           isLogin.value = true
@@ -376,8 +395,8 @@ article {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 25px;
-    border-top-left-radius: 225px;
-    border-bottom-left-radius: 225px;
+    border-top-left-radius: 265px;
+    border-bottom-left-radius: 265px;
     border: 1px solid rgba(146, 145, 145, 0.2);
     background-color: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(5px);
@@ -389,8 +408,6 @@ article {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border-top-left-radius: 225px;
-      border-bottom-left-radius: 225px;
       font-size: 50px;
       font-weight: bold;
       color: aliceblue;

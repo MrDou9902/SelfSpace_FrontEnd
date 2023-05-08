@@ -16,6 +16,12 @@ router.beforeEach(async (to, from) => {
     ElMessage.warning('您还未登录,请先登录账户!')
     return { name: 'login' }
   }
+  if (from.name !== 'login' && from.path !== '/' && to.name === 'login') {
+    localCache.deleteCache('nickName')
+    localCache.deleteCache('userId')
+    localCache.deleteCache('token')
+    ElMessage.warning('您已退出登录!')
+  }
 })
 
 export default router
