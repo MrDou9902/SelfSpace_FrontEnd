@@ -146,13 +146,12 @@ const changeBGM = async (type: boolean) => {
   }
 }
 .music-player-wrapper {
-  height: 400px;
+  // height: 100%;
   width: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-  // background-color: #fff;
+  // border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.729);
   backdrop-filter: blur(10px);
   padding-left: 20px;

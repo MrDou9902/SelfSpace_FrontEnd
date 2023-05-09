@@ -1,7 +1,7 @@
 <template>
   <Transition>
     <header>
-      <span>{{ '您好，' + userName }}</span>
+      <span>{{ '哈喽哇，' + userName }}</span>
       <el-icon class="back-btn" @click="backToHome"><SwitchButton /></el-icon>
     </header>
   </Transition>

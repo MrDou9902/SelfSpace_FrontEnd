@@ -1,8 +1,9 @@
 <template>
   <div id="login">
     <header>
-      <imgGroup />
+      <!-- <imgGroup /> -->
       <backGroundMusic @playingStatusChange="playingStatusChange" />
+      <HeaderAnimation :isPlaying="isPlaying" />
       <div class="login-box" @click="showLoginTable">
         <div class="login-text">
           <span>{{ isLoginTag ? ' 收起' : '登录' }}</span>
@@ -142,9 +143,10 @@ import { login, register } from '@/api/login'
 import localCache from '@/utils/LocalStorage'
 import particleOptions from './particleOptions'
 import backGroundMusic from './BackgroundMusic.vue'
-import imgGroup from './ImgGroup.vue'
+// import imgGroup from './ImgGroup.vue'
 import ForgetPassWord from './ForgetPassWord.vue'
 import CornerAnimation from './CornerAnimation.vue'
+import HeaderAnimation from './HeaderAnimation.vue'
 
 const firstWords = ref(false)
 const dialogVisible = ref(false)
@@ -313,15 +315,26 @@ header {
   width: 100%;
   height: 120px;
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   top: 0;
   z-index: 1;
-  background-image: linear-gradient(120deg, #e0c3fc3c 0%, #8ec5fc43 100%);
-  backdrop-filter: blur(5px);
+  // background-image: linear-gradient(120deg, #e0c3fc3c 0%, #8ec5fc43 100%);
+  // background-image: linear-gradient(
+  //   to top,
+  //   #dad4ec 0%,
+  //   #dad4ec 1%,
+  //   #f3e7e9 100%
+  // );
+  // backdrop-filter: blur(5px);
   // box-shadow: -1px -1px 2px rgb(39, 65, 65), 5px 5px 20px aqua;
   // animation: animate 5s linear infinite;
+  .circle {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+  }
   .login-box {
     width: 150px;
     height: 150px;
@@ -332,8 +345,9 @@ header {
     border-radius: 50%;
     font-weight: 700;
     font-size: 23px;
-    color: #8ec5fc;
-    background-color: #fff;
+    color: #d5b2d382;
+    // background-color: #fff;
+    background-image: linear-gradient(120deg, #e0c3fc3c 0%, #8ec5fc43 100%);
     transition: all 0.6s ease;
     cursor: pointer;
     .login-text {
@@ -363,6 +377,7 @@ header {
 article {
   width: 100%;
   height: calc(100% - 160px);
+  border-top: 4px solid #d1bdce1c;
   overflow: hidden;
   display: flex;
   flex-wrap: nowrap;
