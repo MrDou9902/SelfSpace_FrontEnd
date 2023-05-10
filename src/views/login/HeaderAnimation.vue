@@ -1,29 +1,19 @@
 <template>
-  <div class="circle"></div>
-  <div class="circle delay1"></div>
-  <div class="circle delay2"></div>
-  <div class="circle delay3"></div>
-  <div class="circle delay4"></div>
-  <div class="circle delay5"></div>
-  <div class="circle delay6"></div>
-  <div class="circle delay7"></div>
-  <div class="circle delay8"></div>
-  <div class="circle delay9"></div>
-  <div class="circle"></div>
-  <div class="circle delay1"></div>
-  <div class="circle delay2"></div>
-  <div class="circle delay3"></div>
-  <div class="circle delay4"></div>
-  <div class="circle delay5"></div>
-  <div class="circle delay6"></div>
-  <div class="circle delay7"></div>
-  <div class="circle delay8"></div>
-  <div class="circle delay9"></div>
+  <div
+    v-for="(item, index) in divList"
+    :key="index"
+    :class="`circle delay${index} ${props.isPlaying ? 'animate' : ''}`"
+  />
+  <div
+    v-for="(item, index) in divList"
+    :key="index"
+    :class="`circle delay${index} ${props.isPlaying ? 'animate' : ''}`"
+  />
 </template>
 
 <script lang="ts" setup>
-import { watch } from 'vue'
-
+import { watch, ref } from 'vue'
+const divList = ref([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 const props = defineProps({
   isPlaying: Boolean
 })
@@ -55,6 +45,8 @@ watch(
   width: 20px;
   height: 20px;
   background-image: linear-gradient(120deg, #e0c3fc3c 0%, #8ec5fc43 100%);
+}
+.animate {
   animation: articleWave 2s ease-in-out infinite;
 }
 .delay1 {
