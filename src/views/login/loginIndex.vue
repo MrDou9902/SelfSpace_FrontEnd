@@ -320,16 +320,11 @@ header {
   position: fixed;
   top: 0;
   z-index: 1;
-  // background-image: linear-gradient(120deg, #e0c3fc3c 0%, #8ec5fc43 100%);
-  // background-image: linear-gradient(
-  //   to top,
-  //   #dad4ec 0%,
-  //   #dad4ec 1%,
-  //   #f3e7e9 100%
-  // );
-  // backdrop-filter: blur(5px);
-  // box-shadow: -1px -1px 2px rgb(39, 65, 65), 5px 5px 20px aqua;
-  // animation: animate 5s linear infinite;
+  background-image: linear-gradient(
+    to top,
+    rgba(253, 253, 253, 0.9921568627) 0%,
+    rgb(122 122 122) 100%
+  );
   .circle {
     border-radius: 50%;
     width: 80px;
@@ -345,10 +340,9 @@ header {
     border-radius: 50%;
     font-weight: 700;
     font-size: 23px;
-    color: #d5b2d382;
-    // background-color: #fff;
-    background-image: linear-gradient(120deg, #e0c3fc3c 0%, #8ec5fc43 100%);
-    transition: all 0.6s ease;
+    color: #534f4fa3;
+    background-color: #fff;
+    transition: all 0.8s ease;
     cursor: pointer;
     .login-text {
       width: 100%;
@@ -359,16 +353,16 @@ header {
       justify-content: left;
       align-items: center;
       transform: translate(0, -50%);
-      transition: all 1.5s ease;
+      transition: all 1.2s ease;
       span {
         margin-right: 15px;
       }
     }
     &:hover {
-      width: 300px;
-      height: 300px;
+      width: 450px;
+      height: 450px;
       .login-text {
-        left: 100px;
+        left: 160px;
       }
     }
   }
@@ -377,7 +371,6 @@ header {
 article {
   width: 100%;
   height: calc(100% - 160px);
-  border-top: 4px solid #d1bdce1c;
   overflow: hidden;
   display: flex;
   flex-wrap: nowrap;
@@ -425,24 +418,18 @@ article {
       justify-content: center;
       font-size: 50px;
       font-weight: bold;
-      color: aliceblue;
-      h1 {
-        color: white;
-        white-space: nowrap;
-      }
-      span {
-        font-size: 1.2rem;
-        text-align: center;
-        color: white;
-        white-space: nowrap;
-      }
+      color: rgba(216, 167, 167, 0.589);
       .welcome {
         height: 30%;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 100px;
-        background-image: linear-gradient(to top, #fad0c4bd 0%, #ffd1ffa1 100%);
+        background-image: linear-gradient(
+          to right,
+          #fdfdfdfd 0%,
+          #dbdbdb85 100%
+        );
       }
     }
     .right-card {
@@ -500,7 +487,7 @@ footer {
   font-size: 12px;
   letter-spacing: 1px;
   .el-link {
-    color: #ffc4c4;
+    color: #d2c3ddba;
   }
 }
 

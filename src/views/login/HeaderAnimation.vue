@@ -44,7 +44,11 @@ watch(
   border-radius: 50%;
   width: 20px;
   height: 20px;
-  background-image: linear-gradient(120deg, #e0c3fc3c 0%, #8ec5fc43 100%);
+  background-image: linear-gradient(
+    120deg,
+    rgba(200, 196, 204, 0.5607843137) 0%,
+    #efefef70 100%
+  );
 }
 .animate {
   animation: articleWave 2s ease-in-out infinite;

@@ -146,13 +146,10 @@ const changeBGM = async (type: boolean) => {
   }
 }
 .music-player-wrapper {
-  // height: 100%;
   width: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
-  // border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.729);
   backdrop-filter: blur(10px);
   padding-left: 20px;
   .img {
@@ -174,7 +171,7 @@ const changeBGM = async (type: boolean) => {
   .play-controls {
     width: 250px;
     font-size: 25px;
-    color: #8ec5fc;
+    color: rgba(255, 255, 255, 0.664);
     .music-detail {
       position: relative;
       display: inline-block;
@@ -195,6 +192,7 @@ const changeBGM = async (type: boolean) => {
       display: flex;
       justify-content: space-around;
       line-height: 35px;
+      color: #58575798;
       .specialIcon {
         font-size: 35px;
         transform: translateY(-4px);
@@ -209,7 +207,7 @@ const changeBGM = async (type: boolean) => {
   }
 }
 :deep(.el-slider__bar) {
-  background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  background-image: linear-gradient(120deg, #ffffff 0%, #6a6969 100%);
   border-radius: 3px;
 }
 :deep(.el-slider__button-wrapper) {

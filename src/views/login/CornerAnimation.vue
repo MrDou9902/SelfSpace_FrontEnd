@@ -4,24 +4,28 @@
     <div class="single-wave delay1"></div>
     <div class="single-wave delay2"></div>
     <div class="single-wave delay3"></div>
+    <div class="single-wave delay4"></div>
   </div>
   <div class="left-bottom">
     <div class="single-wave"></div>
     <div class="single-wave delay1"></div>
     <div class="single-wave delay2"></div>
     <div class="single-wave delay3"></div>
+    <div class="single-wave delay4"></div>
   </div>
   <div class="right-top">
     <div class="single-wave"></div>
     <div class="single-wave delay1"></div>
     <div class="single-wave delay2"></div>
     <div class="single-wave delay3"></div>
+    <div class="single-wave delay4"></div>
   </div>
   <div class="right-bottom">
     <div class="single-wave"></div>
     <div class="single-wave delay1"></div>
     <div class="single-wave delay2"></div>
     <div class="single-wave delay3"></div>
+    <div class="single-wave delay4"></div>
   </div>
 </template>
 
@@ -32,13 +36,13 @@
   0% {
     width: 0;
     height: 0;
-    border: 10px solid #74b3eea2;
+    border: 10px solid #d4b6dba2;
     opacity: 0.8;
   }
   100% {
-    width: 400px;
-    height: 400px;
-    border: 3px solid #ffffff50;
+    width: 600px;
+    height: 600px;
+    border: 3px solid #ffff;
     opacity: 0;
   }
 }
@@ -72,12 +76,15 @@
   animation: articleWave 3s ease-out infinite;
 }
 .delay1 {
-  animation-delay: 0.75s;
+  animation-delay: 0.6s;
 }
 .delay2 {
-  animation-delay: 1.5s;
+  animation-delay: 1.2s;
 }
 .delay3 {
-  animation-delay: 2.25s;
+  animation-delay: 1.8s;
+}
+.delay4 {
+  animation-delay: 2.4s;
 }
 </style>
