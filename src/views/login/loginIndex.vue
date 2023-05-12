@@ -129,6 +129,13 @@
         >https://github.com/MrDou9902</el-link
       >
       &nbsp; 欢迎Follow!😊
+      <el-link
+        class="beian"
+        href="https://beian.miit.gov.cn"
+        target="_blank"
+        type="info"
+        >许可证编号 ： 鄂ICP备2023007515号</el-link
+      >
     </footer>
   </div>
 </template>
@@ -488,6 +495,12 @@ footer {
   letter-spacing: 1px;
   .el-link {
     color: #d2c3ddba;
+  }
+  .beian {
+    position: absolute;
+    right: 0;
+    color: #ffffffb4;
+    font-size: 12px;
   }
 }
 
