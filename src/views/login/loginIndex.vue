@@ -1,7 +1,6 @@
 <template>
   <div id="login">
     <header>
-      <!-- <imgGroup /> -->
       <backGroundMusic @playingStatusChange="playingStatusChange" />
       <HeaderAnimation :isPlaying="isPlaying" />
       <div class="login-box" @click="showLoginTable">
@@ -148,12 +147,11 @@ import { loadFull } from 'tsparticles'
 import { ElMessage } from 'element-plus'
 import { login, register } from '@/api/login'
 import localCache from '@/utils/LocalStorage'
-import particleOptions from './particleOptions'
-import backGroundMusic from './BackgroundMusic.vue'
-// import imgGroup from './ImgGroup.vue'
-import ForgetPassWord from './ForgetPassWord.vue'
-import CornerAnimation from './CornerAnimation.vue'
-import HeaderAnimation from './HeaderAnimation.vue'
+import particleOptions from './opts/particleOptions'
+import backGroundMusic from './components/BackgroundMusic.vue'
+import ForgetPassWord from './components/ForgetPassWord.vue'
+import CornerAnimation from './components/CornerAnimation.vue'
+import HeaderAnimation from './components/HeaderAnimation.vue'
 
 const firstWords = ref(false)
 const dialogVisible = ref(false)
@@ -360,12 +358,13 @@ header {
       justify-content: left;
       align-items: center;
       transform: translate(0, -50%);
-      transition: all 1.2s ease;
+      transition: left 1.2s ease;
       span {
         margin-right: 15px;
       }
     }
     &:hover {
+      color: rgb(201 153 189 / 58%);
       width: 450px;
       height: 450px;
       .login-text {

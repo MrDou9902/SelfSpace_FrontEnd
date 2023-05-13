@@ -40,7 +40,7 @@
 
 <script lang="ts" setup>
 import playImg from '@/assets/img/musicImg.jpg'
-import { musicList, singleMusic } from './musicList'
+import { musicList, singleMusic } from '../opts/musicList'
 import { ref } from 'vue'
 
 const currentTime = ref('00:00')

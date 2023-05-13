@@ -1,5 +1,5 @@
 const Login = () => import('@/views/login/loginIndex.vue')
-const Home = () => import('@/components/homeWrapper.vue')
+const Home = () => import('@/components/layout/homeWrapper.vue')
 const homeIndex = () => import('@/views/home/homeIndex.vue')
 const b = { template: '<div>About</div>' }
 
