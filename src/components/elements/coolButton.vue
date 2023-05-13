@@ -46,6 +46,8 @@ const btnClick = () => {
   height: 45px;
   display: flex;
   align-items: center;
+  position: relative;
+  user-select: none;
   cursor: pointer;
   .container {
     height: 45px;
@@ -59,7 +61,6 @@ const btnClick = () => {
     border-radius: 999px;
     color: v-bind('lightColor');
     background-color: v-bind('darkColor');
-    user-select: none;
     transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     .el-icon {
       font-size: 20px;
