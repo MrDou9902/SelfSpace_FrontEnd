@@ -4,7 +4,7 @@
       ref="ruleFormRef"
       :model="resetForm"
       :rules="rules"
-      label-width="70px"
+      label-width=".7rem"
     >
       <el-form-item label="用户名" prop="userName">
         <el-input v-model="resetForm.userName" placeholder="请输入用户名" />
@@ -90,16 +90,16 @@ const confirm = async () => {
 
 <style lang="scss" scoped>
 :deep(.el-input .el-input__wrapper) {
-  height: 35px;
-  border-radius: 18px;
+  height: 0.35rem;
+  border-radius: 0.18rem;
   font-size: inherit;
-  line-height: 35px;
+  line-height: 0.35rem;
 }
 .el-button {
-  width: 100px;
-  height: 32px;
-  border-radius: 30px;
-  line-height: 35px;
+  width: 1rem;
+  height: 0.32rem;
+  border-radius: 0.3rem;
+  line-height: 0.35rem;
   margin: 0;
 }
 </style>

@@ -1,8 +1,29 @@
-:root {
-  --theme-bg-color: #fff;
-  --btn-color: #409eff;
+// :root {
+//   --theme-bg-color: #fff;
+//   --btn-color: #409eff;
+// }
+// .dark {
+//   --theme-bg-color: #293146;
+//   --btn-color: #293146;
+// }
+
+// 14px
+@media screen and (max-width: 1080px) {
+  html {
+    font-size: 546.875% !important;
+  }
 }
-.dark {
-  --theme-bg-color: #293146;
-  --btn-color: #293146;
+
+// 16px
+@media screen and (min-width:1080px) and (max-width: 1920px) {
+  html {
+    font-size: 625% !important;
+  }
+}
+
+// 18px
+@media screen and (min-width:1920px) {
+  html {
+    font-size: 703.125% !important;
+  }
 }

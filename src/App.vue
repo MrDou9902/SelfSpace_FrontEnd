@@ -20,13 +20,16 @@
 }
 
 .el-notification {
-  border-radius: 30px !important;
+  border-radius: 0.3rem !important;
   background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
   border: none;
 }
 .el-message--warning {
-  border-radius: 30px !important;
+  border-radius: 0.3rem !important;
   background-image: linear-gradient(-20deg, #f1b3be4f 0%, #fae2d248 100%);
   border: none;
+  i {
+    font-size: 0.16rem;
+  }
 }
 </style>

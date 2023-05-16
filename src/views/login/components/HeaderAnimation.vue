@@ -42,8 +42,8 @@ watch(
 }
 .circle {
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 0.2rem;
+  height: 0.2rem;
   background-image: linear-gradient(
     120deg,
     rgba(200, 196, 204, 0.5607843137) 0%,

@@ -48,16 +48,16 @@
             <Transition>
               <div v-if="changeItem" class="right-card">
                 <el-card class="el-card">
-                  <h2 style="opacity: 0.6">
+                  <div class="card-title">
                     {{ isLogin ? '欢迎登录' : '欢迎注册' }}
-                  </h2>
+                  </div>
                   <el-form
                     ref="ruleFormRef"
                     class="loginForm"
                     :model="userLoginForm"
                     :rules="rules"
                     label-position="top"
-                    label-width="70px"
+                    label-width=".7rem"
                   >
                     <el-form-item label="用户名" prop="userName">
                       <el-input
@@ -318,7 +318,7 @@ const closeDialog = () => {
 }
 header {
   width: 100%;
-  height: 120px;
+  height: 1.2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -332,19 +332,19 @@ header {
   );
   .circle {
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    width: 0.8rem;
+    height: 0.8rem;
   }
   .login-box {
-    width: 150px;
-    height: 150px;
+    width: 1.5rem;
+    height: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     transform: translateX(20%);
     border-radius: 50%;
     font-weight: 700;
-    font-size: 23px;
+    font-size: 0.23rem;
     color: #534f4fa3;
     background-color: #fff;
     transition: all 0.8s ease;
@@ -353,37 +353,36 @@ header {
       width: 100%;
       position: absolute;
       top: 50%;
-      left: 30px;
+      left: 0.3rem;
       display: flex;
       justify-content: left;
       align-items: center;
       transform: translate(0, -50%);
       transition: left 1.2s ease;
       span {
-        margin-right: 15px;
+        margin-right: 0.15rem;
       }
     }
     &:hover {
       color: rgb(201 153 189 / 58%);
-      width: 450px;
-      height: 450px;
+      width: 4.5rem;
+      height: 4.5rem;
       .login-text {
-        left: 160px;
+        left: 1.6rem;
       }
     }
   }
 }
-
 article {
   width: 100%;
-  height: calc(100% - 160px);
+  height: calc(100% - 1.6rem);
   overflow: hidden;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  bottom: 40px;
+  bottom: 0.4rem;
   z-index: 2;
   background-size: 100% 100%;
   background-color: #fff;
@@ -394,10 +393,10 @@ article {
     flex-direction: column;
     span {
       width: 100%;
-      font-size: 60px;
+      font-size: 0.6rem;
       text-align: center;
       color: #9b89a8a8;
-      margin-bottom: 60px;
+      margin-bottom: 0.6rem;
       font-family: 'font';
     }
   }
@@ -408,29 +407,30 @@ article {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 25px;
-    border-top-left-radius: 265px;
-    border-bottom-left-radius: 265px;
+    border-radius: 0.25rem;
+    border-top-left-radius: 2.65rem;
+    border-bottom-left-radius: 2.65rem;
     border: 1px solid rgba(146, 145, 145, 0.2);
     background-color: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(5px);
-    box-shadow: 0px 0px 10px rgba(218, 215, 225, 0.781),
-      5px 5px 20px rgb(193, 218, 218);
+    backdrop-filter: blur(0.05rem);
+    box-shadow: 0px 0px 0.1rem rgba(218, 215, 225, 0.781),
+      0.05rem 0.05rem 0.2rem rgb(193, 218, 218);
     animation: animate 5s linear infinite;
     .left-card {
-      width: 500px;
+      width: 5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      font-size: 50px;
+      font-size: 0.5rem;
       font-weight: bold;
       color: rgba(216, 167, 167, 0.589);
       .welcome {
+        font-size: 0.45rem;
         height: 30%;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 100px;
+        border-radius: 1rem;
         background-image: linear-gradient(
           to right,
           #fdfdfdfd 0%,
@@ -439,58 +439,72 @@ article {
       }
     }
     .right-card {
-      width: 400px;
-      padding: 20px 0;
+      width: 4rem;
+      padding: 0.2rem 0;
       display: flex;
       justify-content: center;
       align-items: center;
       .el-card {
         width: 70%;
-        margin: 0 30px;
-        border-radius: 25px;
+        margin: 0 0.3rem;
+        border-radius: 0.25rem;
         background-color: rgba(255, 255, 255, 0.1);
         .el-checkbox {
           color: #333;
         }
+        .button-group {
+          font-size: 0.16rem;
+          .el-button {
+            font-size: 0.15rem;
+          }
+        }
       }
-      h2 {
-        margin-bottom: 10px;
+      .card-title {
+        opacity: 0.6;
+        font-size: 0.25rem;
+        font-weight: bold;
+        margin-bottom: 0.2rem;
       }
       .loginForm {
+        font-size: 0.16rem;
         .rememberPassword :deep(.el-form-item__content) {
           justify-content: space-around;
         }
+        :deep(.el-form-item__content .el-link),
+        :deep(.el-form-item__label) {
+          font-size: 0.15rem;
+        }
         :deep(.el-input .el-input__wrapper) {
-          height: 35px;
-          border-radius: 18px;
+          height: 0.35rem;
+          border-radius: 0.18rem;
           font-size: inherit;
-          line-height: 35px;
+          line-height: 0.35rem;
         }
       }
       .el-button {
         width: 80%;
-        height: 2rem;
-        border-radius: 30px;
-        line-height: 35px;
+        height: 0.35rem;
+        border-radius: 0.3rem;
+        line-height: 0.35rem;
       }
     }
   }
 }
 footer {
   width: 100%;
-  height: 40px;
+  height: 0.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  line-height: 40px;
+  line-height: 0.4rem;
   position: fixed;
   bottom: 0;
   z-index: 2;
   background: #3333338a;
   color: #ffffffb7;
   font-family: Arial;
-  font-size: 12px;
+  font-size: 0.12rem;
   letter-spacing: 1px;
   .el-link {
     color: #d2c3ddba;
@@ -499,13 +513,12 @@ footer {
     position: absolute;
     right: 0;
     color: #ffffffb4;
-    font-size: 12px;
+    font-size: 0.12rem;
   }
 }
-
 :deep(.el-dialog) {
-  width: 400px;
-  padding: 20px 0;
+  width: 4rem;
+  padding: 0.2rem 0;
   margin: 0;
   position: absolute;
   transform: translate(-50%, -50%);
@@ -515,12 +528,12 @@ footer {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  border-radius: 25px;
+  border-radius: 0.25rem;
   border: 1px solid rgba(146, 145, 145, 0.2);
   background-color: rgba(246, 247, 244, 0.904) !important;
-  backdrop-filter: blur(5px);
-  box-shadow: 0px 0px 10px rgba(218, 215, 225, 0.781),
-    5px 5px 20px rgb(193, 218, 218);
+  backdrop-filter: blur(0.05rem);
+  box-shadow: 0px 0px 0.1rem rgba(218, 215, 225, 0.781),
+    0.05rem 0.05rem 0.2rem rgb(193, 218, 218);
   animation: animate 5s linear infinite;
   .el-dialog__footer {
     width: 70%;
@@ -529,16 +542,16 @@ footer {
     align-items: center;
   }
   .el-dialog__header {
+    font-size: 0.16rem;
     margin: 0;
-    padding: 0 0 10px 0;
+    padding: 0 0 0.1rem 0;
     .el-dialog__title {
       color: #5b5d5f;
       font-weight: bold;
-      font-size: 22px;
+      font-size: 0.22rem;
     }
   }
 }
-
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.4s ease;
@@ -553,12 +566,12 @@ footer {
 }
 .slide-fade-last-enter-from,
 .slide-fade-last-leave-to {
-  transform: translateX(100px);
+  transform: translateX(1rem);
   opacity: 0;
 }
 .slide-fade-first-enter-from,
 .slide-fade-first-leave-to {
-  transform: translateX(-100px);
+  transform: translateX(-1rem);
   opacity: 0;
 }
 </style>

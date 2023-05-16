@@ -146,18 +146,18 @@ const changeBGM = async (type: boolean) => {
   }
 }
 .music-player-wrapper {
-  width: 400px;
+  width: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(10px);
-  padding-left: 20px;
+  backdrop-filter: blur(0.1rem);
+  padding-left: 0.2rem;
   .img {
-    width: 70px;
-    height: 70px;
-    left: 20px;
+    width: 0.7rem;
+    height: 0.7rem;
+    left: 0.2rem;
     opacity: 0.7;
-    margin-top: 60px;
+    margin-top: 0.3rem;
     animation: rotate 15s linear infinite;
     img {
       width: 100%;
@@ -169,46 +169,46 @@ const changeBGM = async (type: boolean) => {
     animation-play-state: paused !important;
   }
   .play-controls {
-    width: 250px;
-    font-size: 25px;
+    width: 2.5rem;
+    font-size: 0.25rem;
     color: rgba(255, 255, 255, 0.664);
     .music-detail {
       position: relative;
       display: inline-block;
-      width: 250px;
-      height: 30px;
-      line-height: 30px;
+      width: 2.5rem;
+      height: 0.3rem;
+      line-height: 0.3rem;
       overflow: hidden;
       span {
         position: absolute;
         display: inline-block;
         overflow: hidden;
         white-space: nowrap;
-        min-width: 150px;
+        min-width: 1.5rem;
         animation: bgmTitleScroll 6s linear infinite;
       }
     }
     .icon-group {
       display: flex;
       justify-content: space-around;
-      line-height: 35px;
+      line-height: 0.35rem;
       color: #58575798;
       .specialIcon {
-        font-size: 35px;
-        transform: translateY(-4px);
+        font-size: 0.35rem;
+        transform: translateY(-0.04rem);
       }
       .el-icon {
         cursor: pointer;
       }
     }
     .time-process {
-      font-size: 14px;
+      font-size: 0.14rem;
     }
   }
 }
 :deep(.el-slider__bar) {
   background-image: linear-gradient(120deg, #ffffff 0%, #6a6969 100%);
-  border-radius: 3px;
+  border-radius: 0.03rem;
 }
 :deep(.el-slider__button-wrapper) {
   display: flex;

@@ -36,13 +36,13 @@
   0% {
     width: 0;
     height: 0;
-    border: 10px solid #d4b6dba2;
+    border: 0.1rem solid #d4b6dba2;
     opacity: 0.8;
   }
   100% {
-    width: 600px;
-    height: 600px;
-    border: 3px solid #ffff;
+    width: 6rem;
+    height: 6rem;
+    border: 0.03rem solid #ffff;
     opacity: 0;
   }
 }
