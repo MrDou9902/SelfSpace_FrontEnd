@@ -1,9 +1,10 @@
 <template>
-  <router-view v-slot="{ Component }">
+  <!-- <router-view v-slot="{ Component }">
     <Transition>
       <component :is="Component"></component>
     </Transition>
-  </router-view>
+  </router-view> -->
+  <router-view></router-view>
 </template>
 
 <script setup lang="ts"></script>
@@ -21,7 +22,7 @@
 
 .el-notification {
   border-radius: 0.3rem !important;
-  background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+  background-image: linear-gradient(-225deg, #e8dfeb5e 0%, #e6e8f36e 100%);
   border: none;
 }
 .el-message--warning {
@@ -31,5 +32,9 @@
   i {
     font-size: 0.16rem;
   }
+}
+#app {
+  height: 100vh;
+  overflow: hidden;
 }
 </style>
