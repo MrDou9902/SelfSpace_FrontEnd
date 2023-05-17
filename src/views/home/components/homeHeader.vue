@@ -11,8 +11,8 @@
       </div>
     </div>
     <div class="right-tool">
-      <div>{{ '哈喽哇，' + userName }}</div>
-      <span style="margin: 0 0.1rem; color: #b6a9a9c9"> | </span>
+      <div>{{ 'Hello , ' + userName }}</div>
+      <span style="margin: 0 0.1rem; color: #6b6666da"> | </span>
       <coolButton
         class="logout-btn"
         btnText="Logout"
@@ -31,7 +31,6 @@ import type { menuItemType } from '@/types'
 
 const userName = ref('')
 const router = useRouter()
-const activeIndex = ref('1')
 
 const props = defineProps({
   nowIndex: Number,
@@ -105,6 +104,8 @@ header {
     .item-active {
       position: relative;
       color: rgb(0, 0, 0);
+      text-shadow: 1px 1px 2px rgba(105, 97, 97, 0.281),
+        0 0 1em rgba(105, 97, 97, 0.281), 0 0 0.2em rgba(105, 97, 97, 0.281);
       &::before {
         content: '';
         position: absolute;

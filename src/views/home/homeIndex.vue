@@ -9,7 +9,7 @@
         :key="index"
       >
         <Transition>
-          <div v-show="item.isShow" class="container">
+          <div v-show="item.isShow" class="container" @click="jump(item.id)">
             {{ item.title }}
           </div>
         </Transition>
@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import homeHeader from './components/homeHeader.vue'
 import type { menuItemType } from '@/types'
 
@@ -49,6 +50,11 @@ const menuList = reactive<menuItemType[]>([
     isShow: false,
     title: '生活纪实',
     id: 'live'
+  },
+  {
+    isShow: false,
+    title: '锐评一哈',
+    id: 'comment'
   }
 ])
 
@@ -67,6 +73,10 @@ function handleScroll() {
   }
   menuList[Math.floor(fakeNowIndex + 0.5)].isShow = true
 }
+const router = useRouter()
+const jump = (id: string) => {
+  router.push(`/home/${id}`)
+}
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, true)
@@ -81,6 +91,7 @@ onMounted(() => {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  user-select: none;
   article {
     height: calc(100% - 0.8rem);
     overflow: auto;
@@ -92,6 +103,9 @@ onMounted(() => {
       background-color: #99919159;
       font-size: 0.3rem;
       border-bottom: 2px solid #504a4a81;
+      .container {
+        cursor: pointer;
+      }
     }
   }
 }
